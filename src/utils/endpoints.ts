@@ -1,0 +1,42 @@
+export const endpoints = {
+  auth: {
+    sendOtpSignup: 'auth/api/v1/auth/sendOtp',
+    verifyOtp: 'auth/api/v1/auth/verifyOtp',
+    signup: 'auth/api/v1/auth/signup',
+    loginWithCredentials: 'auth/api/v1/auth/loginWithCredentials',
+    logout: 'auth/api/v1/auth/logout',
+    refreshToken: 'auth/api/v1/auth/refreshToken',
+    sendOtpLogin: 'auth/api/v1/auth/sendOtpLogin',
+    userExistCheck: 'auth/api/v1/auth/checkUsername',
+    languages: 'user/api/v1/config/supportedLanguages',
+    resetPassword: 'auth/api/v1/auth/resetPassword',
+  },
+  user: {
+    kisaniDidiList: 'user/api/v1/staff/kdList',
+    kisanProfileSetupStep1: 'user/api/v1/farmers/createProfile',
+    locations: 'user/api/v1/locations',
+    farmerDetails: 'user/api/v1/farmers',
+    landList: 'user/api/v1/farmers/landList',
+    addLand: 'user/api/v1/farmers/addLand',
+    cropType: 'user/api/v1/farmers/cropType',
+    cropTypeVariety: 'user/api/v1/farmers/cropVariety',
+    cropTypeVarietySeed: 'user/api/v1/farmers/seedVariety',
+    addCropStep3: 'user/api/v1/farmers/addCrop',
+    livestock: 'user/api/v1/farmers/livestock',
+    livestockTypes: 'user/api/v1/farmers/livestockTypes',
+    machinery: 'user/api/v1/farmers/machinery',
+    machineryTypes: 'user/api/v1/farmers/machineryTypes',
+    landDetails: 'user/api/v1/farmers/land/',
+    viewProfile: 'user/api/v1/farmers/viewProfile',
+    familyMembers: 'user/api/v1/farmers/familyMembers',
+    updateProfile: 'user/api/v1/farmers/profile',
+    cropList: '/user/api/v1/farmers/crops/',
+    machinaryAdd: '/user/api/v1/farmers/machinery',
+    cropListUpdate: '/user/api/v1/farmers/crop/',
+
+
+  },
+  content: {
+    getStaticContent: 'user/api/v1/static-content',
+  },
+};
