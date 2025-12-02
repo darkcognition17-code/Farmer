@@ -626,6 +626,7 @@ export const updateLandDetails = createAsyncThunk(
       const response = await authService.updateLandAddress(payload, headers);
       return response;
     } catch (error: any) {
+      console.log('error.response?.data?.message', error.response);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   },

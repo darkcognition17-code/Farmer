@@ -37,6 +37,7 @@ import CommonDropdown from '../../../../../components/CommonDropdown';
 import { Buffer } from 'buffer';
 import { MOBILE_REGEX } from '../../../../../utils/regex';
 import { updateLandDetails } from '../../../../../redux/slices/authSlice';
+import AddressForm from '../../../../../components/AddressForm';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -74,7 +75,6 @@ const EditAddressDetails = () => {
 
   const [showState, setShowState] = useState(false);
   const [showDistrictModal, setShowDistrictModal] = useState(false);
-
   const [showMandal, setshowMandal] = useState(false);
   const [showVillage, setShowVillage] = useState(false);
   const [loadingIndicator, setLoading] = useState(false);
@@ -404,297 +404,33 @@ const EditAddressDetails = () => {
           </CommonText>
         </View>
       </ImageBackground>
+
       <View style={styles.contentContainer}>
         <CommonText style={styles.subHeaderTitle}>
           {t('addressDetailScreen.homeAddressDetails')}
         </CommonText>
 
-        <CommonInput
-          multiline
-          required={true}
-          label={t('profileSetup.completeAddress')}
-          containerStyle={styles.addressInputContainer}
-          style={styles.inputField}
-          placeholder={t('addressDetailScreen.enterAddressPlaceholder')}
-          value={completeAddress}
-          onChangeText={setCompleteAddress}
-          leftIcon={
-            <LocationGray
-              height={moderateScale(24)}
-              width={moderateScale(24)}
-              style={styles.userOrangeIcon}
-            />
-          }
+        {/* USE REUSABLE COMPONENT */}
+        <AddressForm
+          address={completeAddress}
+          setAddress={setCompleteAddress}
+          pincode={pincode}
+          setPincode={setPincode}
+          selectedState={selectedStateObj}
+          setSelectedState={setSelectStateObj}
+          selectedDistrict={selectedDistrict}
+          setSelectedDistrict={setSelectedDistrict}
+          selectedMandal={selectedMandal}
+          setSelectedMandal={setSelectedMandal}
+          selectedVillage={selectedVillage}
+          setSelectedVillage={setSelectedVillage}
+          mandalText={mandal}
+          setMandalText={setMandal}
+          villageText={village}
+          setVillageText={setVillage}
+          isEditMode={true}
         />
 
-        <CommonInput
-          required={true}
-          label={t('profileSetup.pincode')}
-          containerStyle={styles.addressInputContainer}
-          style={styles.inputField}
-          placeholder={t('addressDetailScreen.enterPincodePlaceholder')}
-          value={pincode}
-          onChangeText={setPincode}
-          allowedCharsRegex={MOBILE_REGEX}
-          keyboardType="number-pad"
-          maxLength={6}
-          leftIcon={
-            <PincodeGray
-              height={moderateScale(24)}
-              width={moderateScale(24)}
-              style={styles.userOrangeIcon}
-            />
-          }
-        />
-
-        {/* State Dropdown */}
-        <CommonText style={styles.label}>
-          {t('profileSetup.state')}{' '}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-        <CommonDropdown
-          RightIcon={DownBlack}
-          textStyle={{
-            color: state ? colors.black : colors.Neutrals500,
-          }}
-          label={
-            selectedStateObj?.name ||
-            t('addressDetailScreen.selectStatePlaceholder')
-          }
-          LeftIcon={MapGray}
-          onPress={() => {
-            setSearchQuery(''); // Reset search query on dropdown press
-            resetPagination();
-            setStateArray([]);
-            setShowState(true);
-          }}
-        />
-        <CommonBottomSelectModal
-          isVisible={showState}
-          onClose={() => setShowState(false)}
-          data={stateArray}
-          onSelect={option => {
-            //console.log(option);
-
-            setSelectStateObj(option);
-            setDistrict('');
-            setSelectedDistrict(null);
-            setMandal('');
-            setSelectedMandal(null);
-            setSelectedVillage(null);
-            setSearchQuery('');
-            setDistrictArray([]); // stop UI flashing
-            setshowMandal(false);
-            setShowVillage(false);
-            setVillage('');
-            setShowState(false);
-          }}
-          title={t('addressDetailScreen.selectStatePlaceholder')}
-          onEndReached={() =>
-            getLocationData(page, true, 'state', '', searchQuery)
-          }
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMore}
-          showSearchBar={true}
-          onSearch={setSearchQuery}
-          searchValue={searchQuery}
-          placeHolderSearch={t('addressDetailScreen.searchStatePlaceholder')}
-        />
-
-        {/* District Dropdown */}
-        <CommonText style={styles.label}>
-          {t('profileSetup.district')}{' '}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-        <CommonDropdown
-          RightIcon={DownBlack}
-          textStyle={{
-            color: district ? colors.black : colors.Neutrals500,
-          }}
-          label={
-            selectedDistrict?.name ||
-            t('addressDetailScreen.selectDistrictPlaceholder')
-          }
-          LeftIcon={MapGray}
-          onPress={() => {
-            setSearchQuery(''); // Reset search query on dropdown press
-            resetPagination();
-            setDistrictArray([]);
-            setShowDistrictModal(true);
-          }}
-          disabled={!selectedStateObj?.name} // Disable if no state is selected
-        />
-        <CommonBottomSelectModal
-          isVisible={showDistrictModal}
-          onClose={() => setIsDistrictModalVisible(false)}
-          data={districtArray}
-          onSelect={option => {
-            setSelectedDistrict(option);
-            setDistrict(option.name);
-            setSelectedMandal(null);
-            setSelectedVillage(null);
-            setMandal('');
-            setVillage('');
-            setSearchQuery('');
-            setMondalArray([]); // clear to avoid old flash
-            setVillageArray([]);
-            setShowDistrictModal(false);
-          }}
-          title={t('addressDetailScreen.selectDistrictPlaceholder')}
-          onEndReached={() =>
-            getLocationData(
-              page,
-              true,
-              'district',
-              selectedStateObj?.id,
-              searchQuery,
-            )
-          }
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMore}
-          showSearchBar={true}
-          onSearch={setSearchQuery}
-          searchValue={searchQuery}
-          placeHolderSearch={t('addressDetailScreen.searchDistrictPlaceholder')}
-        />
-
-        {/* Mandal Dropdown */}
-        <CommonText style={styles.label}>
-          {t('profileSetup.mandal')}{' '}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-        <CommonDropdown
-          RightIcon={DownBlack}
-          textStyle={{
-            color: mandal ? colors.black : colors.Neutrals500,
-          }}
-          label={
-            selectedMandal?.name ||
-            t('addressDetailScreen.selectMandalPlaceholder')
-          }
-          LeftIcon={MapGray}
-          onPress={() => {
-            setSearchQuery(''); // Reset search query on dropdown press
-            resetPagination();
-            setMondalArray([]);
-            setshowMandal(true);
-          }}
-          disabled={!selectedDistrict?.name} // Disable if no district is selected
-        />
-
-        {selectedMandal?.name == 'Other' && (
-          <CommonInput
-            placeholder={t('profileSetup.enterMandalName')}
-            leftIcon={
-              <View style={styles.userName}>
-                <Mandal width={moderateScale(24)} height={moderateScale(24)} />
-              </View>
-            }
-            value={mandal}
-            onChangeText={setMandal}
-            style={styles.inputContainer}
-          />
-        )}
-        <CommonBottomSelectModal
-          isVisible={showMandal}
-          onClose={() => setIsMandalModalVisible(false)}
-          data={mondalArray}
-          onSelect={option => {
-            setSelectedMandal(option);
-            //console.log(selectedMandal?.name);
-            setMandal('');
-            // reset village
-            setVillage('');
-            if (selectedMandal?.name != 'Other') {
-              setSelectedVillage(null);
-            }
-            setshowMandal(false);
-            setSearchQuery('');
-            setVillageArray([]); // prevent showing old villages
-          }}
-          title={t('addressDetailScreen.selectMandalPlaceholder')}
-          onEndReached={() =>
-            getLocationData(
-              page,
-              true,
-              'city',
-              selectedDistrict?.id,
-              searchQuery,
-            )
-          }
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMore}
-          showSearchBar={true}
-          onSearch={setSearchQuery}
-          searchValue={searchQuery}
-          placeHolderSearch={t('addressDetailScreen.searchMandalPlaceholder')}
-        />
-
-        {/* Village Dropdown */}
-        <CommonText style={styles.label}>
-          {t('profileSetup.village')}{' '}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-        <CommonDropdown
-          RightIcon={DownBlack}
-          textStyle={{
-            color: village ? colors.black : colors.Neutrals500,
-          }}
-          label={
-            selectedVillage?.name ||
-            (selectedMandal?.name === 'Other' && 'Other') ||
-            t('addressDetailScreen.selectVillagePlaceholder')
-          }
-          LeftIcon={VillageGray}
-          onPress={() => {
-            setSearchQuery(''); // Reset search query on dropdown press
-            resetPagination();
-            setVillageArray([]);
-            setShowVillage(true);
-          }}
-          disabled={selectedMandal?.name == 'Other'} // Disable if no mandal is selected
-        />
-
-        {(selectedVillage?.name === 'Other' ||
-          selectedMandal?.name === 'Other') && (
-          <CommonInput
-            placeholder={t('profileSetup.enterVillage')}
-            leftIcon={
-              <Village width={moderateScale(24)} height={moderateScale(24)} />
-            }
-            value={village}
-            onChangeText={setVillage}
-            style={styles.inputContainer}
-          />
-        )}
-        <CommonBottomSelectModal
-          isVisible={showVillage}
-          onClose={() => setShowVillage(false)}
-          data={villageArray}
-          onSelect={option => {
-            setSelectedVillage(option);
-            setSearchQuery('');
-            setShowVillage(false);
-          }}
-          title={t('addressDetailScreen.selectVillagePlaceholder')}
-          onEndReached={() =>
-            getLocationData(
-              page,
-              true,
-              'village',
-              selectedMandal?.id,
-              searchQuery,
-            )
-          }
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMore}
-          showSearchBar={true}
-          onSearch={setSearchQuery}
-          searchValue={searchQuery}
-          placeHolderSearch={t('addressDetailScreen.searchVillagePlaceholder')}
-        />
-
-        {/* Save Button */}
         <View style={styles.buttonWrapper}>
           <CommonButton
             style={styles.saveButton}

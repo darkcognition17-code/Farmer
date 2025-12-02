@@ -38,6 +38,7 @@ import {
 } from '../../../../redux/slices/authSlice';
 import Loader from '../../../../components/Loader';
 import { MOBILE_REGEX } from '../../../../utils/regex';
+import LandFormBody from '../../../../components/LandFormBody';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -50,6 +51,8 @@ const AddNewLandStep1 = () => {
 
   const [landName, setLandName] = useState<string>('');
   const [ownership, setOwnership] = useState<'own' | 'leased' | null>(null);
+  const [areaValue, setAreaValue] = useState('');
+  const [areaUnit, setAreaUnit] = useState<any>(null);
   const [ownLandValue, setOwnLandValue] = useState<string>('');
   const [ownLandUnit, setOwnLandUnit] = useState<string>('');
   const [leasedLandValue, setLeasedLandValue] = useState<string>('');
@@ -174,7 +177,7 @@ const AddNewLandStep1 = () => {
         </View>
       </ImageBackground>
 
-      <View style={styles.scrollViewContent}>
+      {/* <View style={styles.scrollViewContent}>
         <View style={styles.contentContainer}>
           <CommonText style={styles.subHeader}>
             {t('addNewLand.title')}
@@ -325,6 +328,18 @@ const AddNewLandStep1 = () => {
 
           <View style={styles.spacer} />
         </View>
+      </View> */}
+      <View style={styles.scrollViewContent}>
+        <LandFormBody
+          landName={landName}
+          setLandName={setLandName}
+          ownership={ownership}
+          setOwnership={setOwnership}
+          areaValue={areaValue}
+          setAreaValue={setAreaValue}
+          areaUnit={areaUnit}
+          setAreaUnit={setAreaUnit}
+        />
       </View>
       <View style={styles.buttonWrapper}>
         <CommonButton

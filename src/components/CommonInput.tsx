@@ -27,6 +27,7 @@ interface CommonInputProps extends TextInputProps {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   containerStyle?: ViewStyle;
+  value: number | string;
 }
 
 const CommonInput: React.FC<CommonInputProps> = ({
@@ -37,7 +38,7 @@ const CommonInput: React.FC<CommonInputProps> = ({
   minLength,
   maxLength,
   pattern,
-  value = '',
+  value,
   onChangeText,
   containerStyle,
   onBlur,

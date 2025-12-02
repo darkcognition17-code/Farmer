@@ -5,33 +5,15 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './style';
 import { AppStackParamList } from '../../../../navigation/appNavigator';
-import CommonDropdown from '../../../../components/CommonDropdown';
 import ProfileProgressCard from '../../../../components/ProfileProgressCard';
 import { screenNames } from '../../../../navigation/screenNames';
 import {
   CommonButton,
-  CommonInput,
   CommonText,
   ScreenWrapper,
   CommonBottomSelectModal,
 } from '../../../../components';
 import { Images } from '../../../../assets/images';
-import {
-  Address,
-  AddressGray,
-  BackButton,
-  DistrictGray,
-  DownIcon,
-  Location,
-  Mandal,
-  MandalGray,
-  Pincode,
-  PincodeGray,
-  State,
-  Village,
-  VillageGray,
-} from '../../../../assets/icons';
-import { moderateScale } from '../../../../utils/responsive';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../redux/store';
 import {
@@ -40,9 +22,8 @@ import {
 } from '../../../../redux/slices/authSlice';
 import { Buffer } from 'buffer';
 import Loader from '../../../../components/Loader';
-import { showToastable } from 'react-native-toastable';
-import { MOBILE_REGEX, NAME_REGEX } from '../../../../utils/regex';
 import { AuthStackParamList } from '../../../../navigation/authNavigator';
+import AddressForm from '../../../../components/AddressForm';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -102,8 +83,6 @@ const AddNewLandStep2 = () => {
   const { PayloadStep1 } = params;
 
   const validateForm = () => {
-    let isValid = true;
-
     if (!completeAddress.trim()) return false;
     if (!pincode.trim() || !/^[0-9]{6}$/.test(pincode)) return false;
     if (!selectState) return false;
@@ -386,13 +365,6 @@ const AddNewLandStep2 = () => {
         resizeMode="cover"
       >
         <View style={styles.headerContainer}>
-          {/* <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
-            style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity> */}
           <CommonText style={styles.headerTitle}>
             {t('addNewLand.title')}
           </CommonText>
@@ -413,163 +385,26 @@ const AddNewLandStep2 = () => {
           {t('addNewLand.landLocationDetails')}
         </CommonText>
 
-        <CommonInput
-          keyboardType="default"
-          label={t('profileSetup.completeAddress')}
-          required
-          placeholder={t('profileSetup.enterCompleteAddress')}
-          leftIcon={
-            <AddressGray
-              width={moderateScale(24)}
-              height={moderateScale(24)}
-              style={styles.inputIcon}
-            />
-          }
-          value={completeAddress}
-          onChangeText={setCompleteAddress}
-          style={styles.inputContainer}
-          multiline
+        {/* USE REUSABLE COMPONENT */}
+        <AddressForm
+          address={completeAddress}
+          setAddress={setCompleteAddress}
+          pincode={pincode}
+          setPincode={setPincode}
+          selectedState={selectState}
+          setSelectedState={setSelectState}
+          selectedDistrict={selectedDistrict}
+          setSelectedDistrict={setSelectedDistrict}
+          selectedMandal={selectedMandal}
+          setSelectedMandal={setSelectedMandal}
+          selectedVillage={selectedVillage}
+          setSelectedVillage={setSelectedVillage}
+          mandalText={mandal}
+          setMandalText={setMandal}
+          villageText={village}
+          setVillageText={setVillage}
+          isEditMode={false}
         />
-
-        <CommonText style={styles.label}>
-          {t('profileSetup.pincode')}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-
-        <CommonInput
-          maxLength={6}
-          placeholder={t('profileSetup.enterPincode')}
-          leftIcon={
-            <PincodeGray
-              width={moderateScale(24)}
-              height={moderateScale(24)}
-              style={styles.inputIcon}
-            />
-          }
-          value={pincode}
-          onChangeText={setPincode}
-          keyboardType="numeric"
-          style={styles.inputContainer}
-          allowedCharsRegex={MOBILE_REGEX}
-        />
-
-        <CommonText style={styles.label}>
-          {t('profileSetup.state')}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-
-        <CommonDropdown
-          label={
-            selectState?.name || t('addressDetailScreen.selectStatePlaceholder')
-          }
-          LeftIcon={DistrictGray}
-          RightIcon={DownIcon}
-          onPress={() => {
-            resetPagination();
-            setStateArray([]);
-            setSearchQuery(''); // Reset search query on dropdown press
-            setShowState(true);
-          }}
-        />
-
-        <CommonText style={styles.label}>
-          {t('profileSetup.district')}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-
-        <CommonDropdown
-          label={
-            selectedDistrict?.name ||
-            t('addressDetailScreen.selectDistrictPlaceholder')
-          }
-          LeftIcon={DistrictGray}
-          RightIcon={DownIcon}
-          disabled={!selectState?.name}
-          onPress={() => {
-            resetPagination();
-            setDistrictArray([]);
-            setSearchQuery('');
-            setShowDistrictModal(true);
-          }}
-        />
-
-        <CommonText style={styles.label}>
-          {t('profileSetup.mandal')}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-
-        <CommonDropdown
-          label={
-            selectedMandal?.name ||
-            t('addressDetailScreen.selectMandalPlaceholder')
-          }
-          LeftIcon={MandalGray}
-          RightIcon={DownIcon}
-          disabled={!selectedDistrict?.name}
-          onPress={() => {
-            resetPagination();
-            setMondalArray([]);
-            setSearchQuery('');
-            setshowMandal(true);
-          }}
-        />
-
-        {selectedMandal?.name == 'Other' && (
-          <CommonInput
-            keyboardType="default"
-            placeholder={t('profileSetup.enterMandalName')}
-            leftIcon={
-              <MandalGray
-                width={moderateScale(24)}
-                height={moderateScale(24)}
-                style={styles.dropdownIcon}
-              />
-            }
-            value={mandal}
-            onChangeText={setMandal}
-            style={styles.inputContainer}
-          />
-        )}
-
-        <CommonText style={styles.label}>
-          {t('profileSetup.village')}
-          <CommonText style={styles.required}>*</CommonText>
-        </CommonText>
-
-        <CommonDropdown
-          label={
-            selectedVillage?.name ||
-            (selectedMandal?.name === 'Other' && 'Other') ||
-            t('addressDetailScreen.selectVillagePlaceholder')
-          }
-          LeftIcon={VillageGray}
-          RightIcon={DownIcon}
-          disabled={selectedMandal?.name === 'Other' || !selectedMandal?.name}
-          onPress={() => {
-            resetPagination();
-            setVillageArray([]);
-            setSearchQuery('');
-            setShowVillage(true);
-          }}
-        />
-        {(selectedVillage?.name === 'Other' ||
-          selectedMandal?.name === 'Other') && (
-          <CommonInput
-            keyboardType="default"
-            placeholder={t('profileSetup.enterVillage')}
-            leftIcon={
-              <VillageGray
-                width={moderateScale(24)}
-                height={moderateScale(24)}
-                style={styles.dropdownIcon}
-              />
-            }
-            value={village}
-            onChangeText={setVillage}
-            style={styles.inputContainer}
-            allowedCharsRegex={NAME_REGEX}
-          />
-        )}
       </View>
 
       <View style={styles.buttonWrapper}>
@@ -670,7 +505,6 @@ const AddNewLandStep2 = () => {
           setSelectedVillage(item);
           setShowVillage(false);
           setSearchQuery('');
-          //console.log(selectedVillage?.name);
         }}
         onClose={() => setShowVillage(false)}
         onEndReached={() =>
