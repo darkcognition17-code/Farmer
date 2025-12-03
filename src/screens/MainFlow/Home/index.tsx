@@ -63,6 +63,7 @@ import authService, {
 } from '../../../services/authService';
 import { RootState } from '../../../redux/store';
 import { showToastable } from 'react-native-toastable';
+import CommonLandCard from '../../../components/CommonLandCard';
 // import * as Aes from 'react-native-aes-crypto'; // ✅ correct for TS
 
 // const AES_KEY =
@@ -188,15 +189,6 @@ const HomeScreen = () => {
     }
   };
 
-  const getWeatherIconByName = (weatherText: string) => {
-    if (!weatherText) {
-      return Images.WeatherPlaceholder;
-    }
-    return (
-      weatherIconMap[weatherText.toLowerCase()] || Images.WeatherPlaceholder
-    );
-  };
-
   //   useEffect(() => {
 
   // let encry = encryptData("vipul")
@@ -241,70 +233,59 @@ const HomeScreen = () => {
   //   }
   // }
 
-  const API_KEY = Config.ACCUWEATER_API_KEY;
+  // const API_KEY = Config.ACCUWEATER_API_KEY;
 
-  const getLocation = async () => {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Permission',
-          message: 'This app needs access to your location.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        Geolocation.getCurrentPosition(
-          position => {
-            //console.log(position);
-            setCity('Your City'); // Placeholder for actual city name
-            setLoading(false);
-          },
-          error => {
-            //console.log(error.code, error.message);
-            setLoading(false);
-          },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
-        );
-      }
-    } else {
-      Geolocation.requestAuthorization('whenInUse').then(result => {
-        if (result === 'granted') {
-          Geolocation.getCurrentPosition(
-            position => {
-              //console.log(position);
-              setCity('Your City'); // Placeholder for actual city name
-              setLoading(false);
-            },
-            error => {
-              //console.log(error.code, error.message);
-              setLoading(false);
-            },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
-          );
-        }
-      });
-    }
-  };
+  // const getLocation = async () => {
+  //   if (Platform.OS === 'android') {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  //       {
+  //         title: 'Location Permission',
+  //         message: 'This app needs access to your location.',
+  //         buttonNeutral: 'Ask Me Later',
+  //         buttonNegative: 'Cancel',
+  //         buttonPositive: 'OK',
+  //       },
+  //     );
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //       Geolocation.getCurrentPosition(
+  //         position => {
+  //           //console.log(position);
+  //           setCity('Your City'); // Placeholder for actual city name
+  //           setLoading(false);
+  //         },
+  //         error => {
+  //           //console.log(error.code, error.message);
+  //           setLoading(false);
+  //         },
+  //         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+  //       );
+  //     }
+  //   } else {
+  //     Geolocation.requestAuthorization('whenInUse').then(result => {
+  //       if (result === 'granted') {
+  //         Geolocation.getCurrentPosition(
+  //           position => {
+  //             //console.log(position);
+  //             setCity('Your City'); // Placeholder for actual city name
+  //             setLoading(false);
+  //           },
+  //           error => {
+  //             //console.log(error.code, error.message);
+  //             setLoading(false);
+  //           },
+  //           { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+  //         );
+  //       }
+  //     });
+  //   }
+  // };
 
   // useEffect(() => {
   //   getLocation();
   // }, []);
 
   const images = [Images.land1, Images.land2, Images.land3];
-
-  const getTemperatureColor = (temp: number) => {
-    if (temp >= 0 && temp <= 29) {
-      return colors.Neutrals100;
-    } else if (temp >= 30 && temp <= 40) {
-      return colors.Primary100;
-    } else if (temp > 40) {
-      return colors.ButtonColor;
-    }
-    return colors.Neutrals100; // Default color
-  };
 
   const openWhatsApp = () => {
     if (!farmerDetails?.kisaniDidi?.phoneNumber) {
@@ -370,97 +351,20 @@ const HomeScreen = () => {
   };
 
   const renderLandCard = ({ item: land }: { item: Land }) => (
-    <TouchableOpacity
+    <CommonLandCard
+      title={land.title}
+      cropCount={land.cropCount}
+      acres={land.acres}
+      areaUnit={land.areaUnit}
+      ownedType={land.owned}
+      imageSource={land.imageLand}
+      // Only HomeScreen used isGeoTagged in the provided code
+      isGeoTagged={land?.others?.isGeoTagged}
       onPress={() => {
         navigation.navigate(screenNames.LandDetails, { landDetailsItem: land });
       }}
-    >
-      <View key={land.id} style={styles.landCard}>
-        {/* <TouchableOpacity
-        onPress={() => {
-          setEditModal(true);
-        }}
-        activeOpacity={0.8}
-        style={styles.editButton}
-      >
-        <EditPencilIcon height={moderateScale(16)} width={moderateScale(16)} />
-      </TouchableOpacity> */}
-        <ImagePickerModal
-          visible={editModal}
-          cancelable={false}
-          title1={'Edit Details'}
-          Icon1={
-            <EditModalPencil
-              width={moderateScale(24)}
-              height={moderateScale(24)}
-            />
-          }
-          title2={'Delete'}
-          Icon2={
-            <DustbinModal
-              width={moderateScale(24)}
-              height={moderateScale(24)}
-            />
-          }
-          onCameraPress={() => {
-            navigation.navigate(screenNames.AddNewLandStep3, {
-              item: land,
-            });
-
-            setEditModal(false);
-          }}
-          onGalleryPress={() => {
-            //console.log('gallery');
-            setEditModal(false);
-          }}
-          onClose={() => setEditModal(false)}
-        />
-        <Image source={land?.imageLand} style={styles.landThumb} />
-        {land?.others?.isGeoTagged && (
-          <Image source={Images.geoTag} style={styles.geoTag} />
-        )}
-
-        <View style={styles.landContent}>
-          <CommonText style={styles.landTitle}>{land.title}</CommonText>
-
-          <View style={styles.cropRow}>
-            {land.cropCount > 0 ? (
-              <>
-                <View style={styles.leaf}>
-                  <CropLeaf />
-                </View>
-
-                <CommonText style={styles.cropCount}>
-                  {land.cropCount} {t('home.cropsAdded')}
-                </CommonText>
-              </>
-            ) : (
-              <>
-                <View style={styles.leaf}>
-                  <NoCropLeaf />
-                </View>
-
-                <CommonText style={[styles.cropCount, styles.noCount]}>
-                  {t('home.noCropsAdded')}
-                </CommonText>
-              </>
-            )}
-          </View>
-        </View>
-
-        <View style={styles.landFooter}>
-          <CommonText style={styles.ownedLabel}>
-            {t(`home.${land.owned.toLowerCase()}`)}
-          </CommonText>
-
-          <CommonText style={styles.acres}>
-            {land.acres} {land.areaUnit}
-          </CommonText>
-        </View>
-      </View>
-    </TouchableOpacity>
+    />
   );
-
   const renderEmptyComponent = () => (
     <View style={styles.emptyListContainer}>
       <Image source={Images.landIcon} style={styles.landIconStyle} />

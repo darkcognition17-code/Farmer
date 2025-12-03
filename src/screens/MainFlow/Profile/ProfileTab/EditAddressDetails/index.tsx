@@ -231,7 +231,7 @@ const EditAddressDetails = () => {
           id: '',
           name: 'Other',
           parentId: '',
-          type: t('profileSetup.village'),
+          type: 'village',
         };
         if (!append) {
           setVillageArray(prev => [...prev, newItem]);

@@ -5,29 +5,20 @@ import {
   ImageBackground,
   FlatList,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import {
   CommonButton,
-  CommonInput,
   CommonLoader,
   CommonText,
   ScreenWrapper,
 } from '../../../../../components';
-import {
-  moderateScale,
-  scaledFontSize,
-  verticalScale,
-} from '../../../../../utils/responsive';
+import { moderateScale } from '../../../../../utils/responsive';
 import {
   BackButton,
-  DustbinRed,
   Minus,
   MinusWithRed,
   Plus,
   PlusWithGreen,
-  TickFilled,
-  User,
 } from '../../../../../assets/icons';
 import { Images } from '../../../../../assets/images';
 import { styles } from './style';
@@ -39,27 +30,21 @@ import { colors } from '../../../../../themes/colors';
 import contentService from '../../../../../services/contentService';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../redux/store';
-import {
-  addLivestock,
-  resetAddLivestockState,
-} from '../../../../../redux/slices/addLivestockSlice';
-import {
-  updateLivestock,
-  resetUpdateLivestockState,
-} from '../../../../../redux/slices/updateLivestockSlice';
+import { resetAddLivestockState } from '../../../../../redux/slices/addLivestockSlice';
+import { resetUpdateLivestockState } from '../../../../../redux/slices/updateLivestockSlice';
 import { showToastable } from 'react-native-toastable';
 import { screenNames } from '../../../../../navigation/screenNames';
-import { fonts } from '../../../../../themes/fonts';
 import { IMAGE_BASE_URL } from '../../../../../utils/helperFunction';
 import { SvgUri } from 'react-native-svg';
+import CommonInventoryRender from '../../../../../components/CommonInventoryRender';
 
-interface LivestockItem {
+interface MachineryItem {
   id: string;
   name: string;
   quantity: number;
 }
 
-interface RouteParams {
+interface MachineryRouteParams {
   item?: {
     id: string;
     livestockTypeId: string;
@@ -95,15 +80,15 @@ const AddMachinaryScreen = () => {
     success: updateSuccess,
   } = useSelector((state: RootState) => state.updateLivestock);
 
-  const [machineryStock, setMachineryStock] = useState<LivestockItem[]>([]);
+  const [machineryStock, setMachineryStock] = useState<MachineryItem[]>([]);
   const [cowDungAvailability, setCowDungAvailability] = useState(false);
   const [otherDetails, setOtherDetails] = useState<string[]>([]);
   const [loadingTypes, setLoadingTypes] = useState(true);
   const [errorTypes, setErrorTypes] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editableItem, setEditableItem] = useState<RouteParams['item'] | null>(
-    null,
-  );
+  const [editableItem, setEditableItem] = useState<
+    MachineryRouteParams['item'] | null
+  >(null);
 
   const othersId = '1d34eabd-03b8-4873-93fc-f2ee8b215ff4'; // Hardcoded ID for 'Others'
 
@@ -372,7 +357,14 @@ const AddMachinaryScreen = () => {
               {t('addMachinery.machineryInventory')}
             </CommonText>
           )}
-          renderItem={renderMachinery}
+          // renderItem={renderMachinery}
+          renderItem={({ item }) => (
+            <CommonInventoryRender
+              item={item}
+              onPressMinus={() => handleQuantityChange(item.id, -1)}
+              onPressPlus={() => handleQuantityChange(item.id, 1)}
+            />
+          )}
         />
       </View>
 

@@ -39,9 +39,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { fetchLandList } from '../../../redux/slices/authSlice';
 import { screenNames } from '../../../navigation/screenNames';
+import { MainStackParamList } from '../../../navigation/mainNavigator';
 import { AppStackParamList } from '../../../navigation/appNavigator';
-import LandCard from '../../../components/LandCard';
-import CommonLandCard from '../../../components/CommonLandCard';
 
 interface Land {
   id: string;
@@ -116,18 +115,54 @@ const MyRegisterLand = () => {
     loadLands();
   };
 
+  console.log('land.areaUnit', landList);
+
+  const ImagePlaceholder =
+    'https://www.shutterstock.com/image-vector/wheat-icons-vector-logo-silhouette-600nw-2190758145.jpg';
+
   const renderLandCard = ({ item: land }: { item: Land }) => (
-    <CommonLandCard
-      title={land.title}
-      cropCount={land.cropCount}
-      acres={land.acres}
-      areaUnit={land.areaUnit}
-      ownedType={land.owned}
-      imageSource={land.imageLand}
+    <TouchableOpacity
       onPress={() => {
         navigation.navigate(screenNames.LandDetails, { landDetailsItem: land });
       }}
-    />
+    >
+      <View key={land.id} style={styles.landCard}>
+        <Image source={land.imageLand} style={styles.landThumb} />
+
+        <View style={styles.landContent}>
+          <CommonText style={styles.landTitle}>{land.title}</CommonText>
+          <View style={styles.cropRow}>
+            {land.cropCount > 0 ? (
+              <>
+                <View style={styles.leaf}>
+                  <CropLeaf />
+                </View>
+                <CommonText style={styles.cropCount}>
+                  {land.cropCount} {t('home.cropsAdded')}
+                </CommonText>
+              </>
+            ) : (
+              <>
+                <View style={styles.leaf}>
+                  <NoCropLeaf />
+                </View>
+                <CommonText style={[styles.cropCount, styles.noCount]}>
+                  {t('home.noCropsAdded')}
+                </CommonText>
+              </>
+            )}
+          </View>
+        </View>
+        <View style={styles.landFooter}>
+          <CommonText style={styles.ownedLabel}>
+            {t(`home.${land.owned.toLowerCase()}`)}
+          </CommonText>
+          <CommonText style={styles.acres}>
+            {land.acres} {land.areaUnit}
+          </CommonText>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 
   return (

@@ -5,7 +5,6 @@ import {
   ImageBackground,
   FlatList,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import {
   CommonButton,
@@ -20,10 +19,8 @@ import {
   DustbinRed,
   Minus,
   MinusWithRed,
-  Plus,
   PlusWithGreen,
   TickFilled,
-  User,
 } from '../../../../../assets/icons';
 import { Images } from '../../../../../assets/images';
 import { styles } from './style';
@@ -39,15 +36,13 @@ import {
   addLivestock,
   resetAddLivestockState,
 } from '../../../../../redux/slices/addLivestockSlice';
-import {
-  updateLivestock,
-  resetUpdateLivestockState,
-} from '../../../../../redux/slices/updateLivestockSlice';
+import { resetUpdateLivestockState } from '../../../../../redux/slices/updateLivestockSlice';
 import { showToastable } from 'react-native-toastable';
 import { SvgUri } from 'react-native-svg';
 import { IMAGE_BASE_URL } from '../../../../../utils/helperFunction';
 import { endpoints } from '../../../../../utils/endpoints';
 import { screenNames } from '../../../../../navigation/screenNames';
+import CommonInventoryRender from '../../../../../components/CommonInventoryRender';
 
 interface LivestockItem {
   id: string;
@@ -55,7 +50,7 @@ interface LivestockItem {
   quantity: number;
 }
 
-interface RouteParams {
+interface LivestockRouteParams {
   item?: {
     id: string;
     livestockTypeId: string;
@@ -98,9 +93,9 @@ const AddLiveStock = () => {
   const [loadingTypes, setLoadingTypes] = useState(true);
   const [errorTypes, setErrorTypes] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editableItem, setEditableItem] = useState<RouteParams['item'] | null>(
-    null,
-  );
+  const [editableItem, setEditableItem] = useState<
+    LivestockRouteParams['item'] | null
+  >(null);
 
   const othersId = '1d34eabd-03b8-4873-93fc-f2ee8b215ff4';
 
@@ -336,55 +331,6 @@ const AddLiveStock = () => {
   const currentLoading = isEditMode ? updateLoading : addLoading;
   const currentError = isEditMode ? updateError : addError;
 
-  const renderLiveStock = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <View style={styles.itemLeftContainer}>
-        {item?.imageUrl && (
-          <View style={styles.itemIconContainer}>
-            <SvgUri
-              width={moderateScale(24)}
-              height={moderateScale(24)}
-              uri={IMAGE_BASE_URL + item?.imageUrl}
-            />
-          </View>
-        )}
-        <CommonText style={styles.itemName}>{item.name}</CommonText>
-      </View>
-      <View style={styles.itemRightContainer}>
-        <TouchableOpacity
-          onPress={() => handleQuantityChange(item.id, -1)}
-          disabled={item.quantity === 0}
-          style={styles.quantityButton}
-          activeOpacity={0.8}
-        >
-          {item.quantity === 0 ? (
-            <Minus height={moderateScale(28)} width={moderateScale(28)} />
-          ) : (
-            <MinusWithRed
-              height={moderateScale(28)}
-              width={moderateScale(28)}
-            />
-          )}
-        </TouchableOpacity>
-        <CommonText style={styles.quantityText}>{item.quantity}</CommonText>
-        <TouchableOpacity
-          onPress={() => handleQuantityChange(item.id, 1)}
-          style={styles.quantityButton}
-          activeOpacity={0.8}
-        >
-          {item.quantity === 0 ? (
-            <Plus height={moderateScale(28)} width={moderateScale(28)} />
-          ) : (
-            <PlusWithGreen
-              height={moderateScale(28)}
-              width={moderateScale(28)}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
   return (
     <ScreenWrapper bgColor={colors.transparent}>
       {currentLoading && <CommonLoader visible={currentLoading} />}
@@ -484,7 +430,14 @@ const AddLiveStock = () => {
             data={livestock.filter(item => item.id !== othersId)}
             keyExtractor={key => key.id}
             contentContainerStyle={styles.flatListContent}
-            renderItem={renderLiveStock}
+            // renderItem={renderLiveStock}
+            renderItem={({ item }) => (
+              <CommonInventoryRender
+                item={item}
+                onPressMinus={() => handleQuantityChange(item.id, -1)}
+                onPressPlus={() => handleQuantityChange(item.id, 1)}
+              />
+            )}
           />
         )}
 

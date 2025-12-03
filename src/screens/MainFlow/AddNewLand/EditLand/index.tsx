@@ -25,7 +25,7 @@ const EditLandScreen = () => {
   const route = useRoute<any>();
   const { landDetails } = route.params || {};
   const token = useSelector((state: RootState) => state.auth.accessToken);
-  console.log('landDetails', landDetails);
+  console.log('landDetails', landDetails?.area);
 
   // Initialize state with existing data
   const [landName, setLandName] = useState(landDetails?.landName || '');
@@ -126,7 +126,7 @@ const EditLandScreen = () => {
           setLandName={setLandName}
           ownership={ownership}
           setOwnership={setOwnership}
-          areaValue={areaValue}
+          areaValue={areaValue.toString()}
           setAreaValue={setAreaValue}
           areaUnit={areaUnitState}
           setAreaUnit={setAreaUnitState}
@@ -135,7 +135,7 @@ const EditLandScreen = () => {
 
       <View style={styles.buttonWrapper}>
         <CommonButton
-          title={t('common.save')} // Different button text
+          title={t('profileSetup.saved')} // Different button text
           style={styles.continueButton}
           disabled={!isValid}
           onPress={handleUpdate}
