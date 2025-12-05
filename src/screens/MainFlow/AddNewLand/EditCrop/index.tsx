@@ -1,10 +1,15 @@
 import React, { useEffect, useEffectEvent, useMemo, useState } from 'react';
-import { View, ImageBackground } from 'react-native';
+import { View } from 'react-native';
+
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './style';
 import { AppStackParamList } from '../../../../navigation/appNavigator';
-import { CommonText, ScreenWrapper } from '../../../../components';
+import {
+  CommonText,
+  GradientBackground,
+  ScreenWrapper,
+} from '../../../../components';
 import { Images } from '../../../../assets/images';
 import { colors } from '../../../../themes/colors';
 import { screenNames } from '../../../../navigation/screenNames';
@@ -155,17 +160,13 @@ const EditCrop = () => {
       style={styles.screenWrapper}
     >
       {/* Header Section */}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.headerBackground}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.headerBackground}>
         <View style={styles.headerContainer}>
           <CommonText style={styles.headerTitle}>
             {t('addCrop.editCrop')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       <CropForm
         landDetails={landDetails}

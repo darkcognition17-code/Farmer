@@ -26,7 +26,7 @@ import { scale } from '../../utils/responsive';
 import LinearGradient from 'react-native-linear-gradient';
 import { getLanguage } from '../../redux/slices/authSlice';
 import { Buffer } from 'buffer'; // Available in React Native via polyfill
-import Loader from '../../components/Loader';
+
 import axios from 'axios';
 import Config from 'react-native-config';
 import { endpoints } from '../../utils/endpoints';

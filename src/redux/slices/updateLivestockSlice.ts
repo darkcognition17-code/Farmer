@@ -13,16 +13,6 @@ const initialState: UpdateLivestockState = {
   success: {},
 };
 
-// export const updateLivestock = createAsyncThunk(
-//   'livestock/updateLivestock',
-//   async (data: any) => {
-//     //console.log("data-------------- ",data);
-
-//     const response = await contentService.updateLiveStock(data);
-//     return response;
-//   }
-// );
-
 export const updateLivestock = createAsyncThunk(
   "livestock/updateLivestock'",
   async (

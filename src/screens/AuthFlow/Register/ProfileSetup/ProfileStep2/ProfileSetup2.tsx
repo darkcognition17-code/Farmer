@@ -3,12 +3,13 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
 } from 'react-native';
 import {
   CommonButton,
   CommonInput,
+  CommonLoader,
   CommonText,
+  GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
 import ProfileProgressCard from '../../../../../components/ProfileProgressCard';
@@ -49,7 +50,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../redux/store';
 import { Buffer } from 'buffer';
-import Loader from '../../../../../components/Loader';
+
 import {
   MOBILE_REGEX,
   PASSWORD_HAS_SPECIAL_CHAR_REGEX,
@@ -378,12 +379,10 @@ const ProfileSetupStep2 = ({ navigation }: any) => {
 
   return (
     <ScreenWrapper scrollable style={styles.screenWrapper}>
-      <Loader visible={loading} />
-      <ImageBackground
-        source={Images.GrBg}
+      <CommonLoader visible={loading} />
+      <GradientBackground
         imageStyle={styles.imageBackground}
         style={styles.progressHeader}
-        resizeMode="cover"
       >
         <CommonText style={styles.headerTitle}>
           {t('contactDetailScreen.header')}
@@ -399,7 +398,7 @@ const ProfileSetupStep2 = ({ navigation }: any) => {
             isFrom={t('profileSetup.complete')}
           />
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.formContainer}>
         <CommonText style={styles.sectionTitle}>
           {t('profileSetup.homeAddressDetails')}

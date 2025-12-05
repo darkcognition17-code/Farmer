@@ -3,7 +3,6 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  ImageBackground,
   Platform,
   PermissionsAndroid,
   Linking,
@@ -16,6 +15,7 @@ import {
 import {
   CommonButton,
   CommonText,
+  GradientBackground,
   ImagePickerModal,
   ProfileCompletionCard,
   ScreenWrapper,
@@ -392,8 +392,7 @@ const HomeScreen = () => {
     >
       {/* Header gradient with greeting */}
       <View>
-        <ImageBackground
-          source={Images.GrBg}
+        <GradientBackground
           imageStyle={[
             styles.headerImageStyle,
             profileCompletionPercentage > 0 &&
@@ -445,7 +444,7 @@ const HomeScreen = () => {
               {t('home.todayWeather')}
             </CommonText>
           </View>
-        </ImageBackground>
+        </GradientBackground>
       </View>
 
       <View style={styles.container}>
@@ -454,8 +453,7 @@ const HomeScreen = () => {
           <Image source={Images.AccuweatherLogo} style={styles.accuweather} />
           {loading ? (
             <ActivityIndicator
-              size="large"
-              color={colors.Primary500}
+              color={colors.ButtonColor}
               style={styles.loader}
             />
           ) : (

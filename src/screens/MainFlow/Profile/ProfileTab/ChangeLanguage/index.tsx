@@ -6,7 +6,6 @@ import {
   Image,
   Platform,
   Animated,
-  ImageBackground,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../redux/store';
@@ -22,11 +21,11 @@ import { colors } from '../../../../../themes/colors';
 import {
   CommonButton,
   CommonText,
+  GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
 import { moderateScale, scale } from '../../../../../utils/responsive';
 import { getLanguage } from '../../../../../redux/slices/authSlice';
-import Loader from '../../../../../components/Loader';
 
 import { showToastable } from 'react-native-toastable';
 import { AppStackParamList } from '../../../../../navigation/appNavigator';
@@ -51,11 +50,7 @@ const ChangeLanguageScreen = () => {
   return (
     <ScreenWrapper bgColor={colors.white}>
       {/* Pass currentLang so it pre-selects the user's active choice */}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -68,7 +63,7 @@ const ChangeLanguageScreen = () => {
             {t('profileScreen.changeLanguageTitle')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <LanguageSelector
         mode="settings"
         initialLanguage={language}

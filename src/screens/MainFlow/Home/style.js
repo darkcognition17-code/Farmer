@@ -28,6 +28,26 @@ export const styles = StyleSheet.create({
       width: 0,
     },
   },
+  dateText: {
+    marginTop: verticalScale(6),
+    color: colors.Neutrals300,
+    fontSize: moderateScale(12),
+    fontFamily: fonts.regular,
+    lineHeight: verticalScale(18),
+  },
+  bell: {
+    borderRadius: moderateScale(14),
+    backgroundColor: colors.white,
+    padding: moderateScale(10),
+    resizeMode: 'contain',
+  },
+  dateText2: {
+    marginTop: moderateScale(21),
+    marginBottom: moderateScale(10),
+    color: colors.Neutrals100,
+    fontSize: moderateScale(16),
+    fontWeight: 'bold',
+  },
   headerContentSub: {
     marginTop: verticalScale(65),
     justifyContent: 'space-between',
@@ -58,26 +78,7 @@ export const styles = StyleSheet.create({
     height: moderateScale(64),
     width: moderateScale(64),
   },
-  dateText: {
-    marginTop: verticalScale(6),
-    color: colors.Neutrals300,
-    fontSize: moderateScale(12),
-    fontFamily: fonts.regular,
-    lineHeight: verticalScale(18),
-  },
-  bell: {
-    borderRadius: moderateScale(14),
-    backgroundColor: colors.white,
-    padding: moderateScale(10),
-    resizeMode: 'contain',
-  },
-  dateText2: {
-    marginTop: moderateScale(21),
-    marginBottom: moderateScale(10),
-    color: colors.Neutrals100,
-    fontSize: moderateScale(16),
-    fontWeight: 'bold',
-  },
+
   container: {
     alignSelf: 'center',
     width: '100%',

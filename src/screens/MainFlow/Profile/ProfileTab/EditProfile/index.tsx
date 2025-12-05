@@ -3,7 +3,6 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ImageBackground,
   Platform,
 } from 'react-native';
 import {
@@ -12,6 +11,7 @@ import {
   CommonText,
   ScreenWrapper,
   CommonLoader, // Import CommonLoader
+  GradientBackground,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
@@ -210,11 +210,9 @@ const EditProfileScreen = () => {
       bgColor={colors.transparent}
       style={styles.screenWrapperContainer}
     >
-      <ImageBackground
-        source={Images.GrBg}
+      <GradientBackground
         style={styles.progressHeader}
         imageStyle={styles.imageBackgroundStyle}
-        resizeMode="cover"
       >
         <View style={styles.headerContainer}>
           <TouchableOpacity
@@ -228,7 +226,7 @@ const EditProfileScreen = () => {
             {t('editProfile.headerTitle')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.contentContainer}>
         <View style={styles.profileSection}>
           <Image

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ImageBackground, Alert } from 'react-native';
+import { View, TouchableOpacity, Alert } from 'react-native';
 import {
   CommonInput,
   CommonButton,
@@ -7,6 +7,7 @@ import {
   ScreenWrapper,
   CommonBottomSelectModal,
   CommonLoader,
+  GradientBackground,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
@@ -138,11 +139,9 @@ const EditAdditionalDetails = () => {
       bgColor={colors.transparent}
       style={styles.screenWrapperContainer}
     >
-      <ImageBackground
-        source={Images.GrBg}
+      <GradientBackground
         style={styles.progressHeader}
         imageStyle={styles.imageBackgroundStyle}
-        resizeMode="cover"
       >
         <View style={styles.headerContainer}>
           <TouchableOpacity
@@ -156,7 +155,7 @@ const EditAdditionalDetails = () => {
             {t('editAdditionalDetails.headerTitle')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.contentContainer}>
         {/* Guardian Name */}
         <CommonText style={styles.subHeaderTitle}>

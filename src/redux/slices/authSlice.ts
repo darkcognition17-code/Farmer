@@ -152,22 +152,6 @@ export const refreshAccessToken = createAsyncThunk(
   },
 );
 
-// //UserName Exist or Not
-// export const checkUserExist = createAsyncThunk(
-//   endpoints.auth.userExistCheck,
-//   async (payload: userNameExist, { rejectWithValue }) => {
-//     try {
-//       const response = await authService.checkuserNameExist(payload);
-//       return response;
-//     } catch (error: any) {
-//       //console.log("error------->", error);
-//       return rejectWithValue(error.response?.data?.message || error.message);
-//     }
-//   }
-// );
-
-// Get Langauge
-
 export const getLanguage = createAsyncThunk(
   endpoints.auth.languages,
   async (
@@ -268,27 +252,6 @@ export const getLocationList = createAsyncThunk(
     }
   },
 );
-
-//Profile Step 1 Submit
-
-// export const submitProfileStep1 = createAsyncThunk(
-//   endpoints.user.kisanProfileSetupStep1,
-//   async (
-//     { payload, headers }: { payload: {}; headers?: Record<string, string> },
-//     { rejectWithValue }
-//   ) => {
-//     const tokenBasic = Buffer.from(`${'mysecret'}:${'password'}`, 'utf8').toString('base64');
-
-//     try {
-//       const response = await authService.step1FarmerProfile(payload, {
-//         Authorization: `Basic ${tokenBasic}`,
-//       });
-//       return response;
-//     } catch (error: any) {
-//       //console.log("error.response?--------", error);
-//       return rejectWithValue(error.response?.data?.message || error.message);
-//     }
-//   }
 
 //Steps 1/2/3 for profile setup
 export const submitProfileStep1 = createAsyncThunk(
@@ -591,24 +554,6 @@ export const getLandDetails = createAsyncThunk(
     }
   },
 );
-
-// export const updateLandDetails = createAsyncThunk(
-//   endpoints.user.landDetails, // PATCH /user/api/v1/farmers/profile
-//   async (
-//     {
-//       payload,
-//       headers,
-//     }: { payload: FormData; headers?: Record<string, string> },
-//     { rejectWithValue },
-//   ) => {
-//     try {
-//       const response = await authService.updateLandAddress(payload, headers);
-//       return response;
-//     } catch (error: any) {
-//       return rejectWithValue(error.response?.data?.message || error.message);
-//     }
-//   },
-// );
 
 export const updateLandDetails = createAsyncThunk(
   `${endpoints.user.landDetails}`, // A unique action type for update

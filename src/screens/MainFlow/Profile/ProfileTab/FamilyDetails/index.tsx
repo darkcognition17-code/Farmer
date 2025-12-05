@@ -5,7 +5,6 @@ import {
   Platform,
   KeyboardAvoidingView,
   TouchableOpacity,
-  ImageBackground,
   Alert,
 } from 'react-native';
 import {
@@ -14,6 +13,7 @@ import {
   CommonText,
   ScreenWrapper,
   CommonLoader,
+  GradientBackground,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
 import { BackButton, UserUnfilledGray } from '../../../../../assets/icons';
@@ -106,11 +106,7 @@ const FamilyDetails = () => {
       showBackButton
       gradientHeader
     >
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -123,7 +119,7 @@ const FamilyDetails = () => {
             {t('familyMemberDetails.headerTitle')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.keyboardAvoidingView}

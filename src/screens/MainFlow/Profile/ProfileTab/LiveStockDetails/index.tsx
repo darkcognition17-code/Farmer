@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
-  ImageBackground,
   FlatList,
   ActivityIndicator,
   RefreshControl,
@@ -12,6 +11,7 @@ import {
   CommonButton,
   CommonLoader,
   CommonText,
+  GradientBackground,
   ImagePickerModal,
   ScreenWrapper,
 } from '../../../../../components';
@@ -140,6 +140,17 @@ const LiveStockDetails = () => {
     }
   };
 
+  const onDeletePress = () => {
+    handleDelete(sentItem);
+    setEditModal(false);
+  };
+  const handleEdit = () => {
+    navigation.navigate(screenNames.AddLiveStockScreen, {
+      item: sentItem,
+    });
+    setEditModal(false);
+  };
+
   const renderUserLiveStock = ({ item }) => (
     <View style={styles.itemContainer}>
       <TouchableOpacity
@@ -162,20 +173,12 @@ const LiveStockDetails = () => {
             height={moderateScale(24)}
           />
         }
-        onCameraPress={() => {
-          navigation.navigate(screenNames.AddLiveStockScreen, {
-            item: sentItem,
-          });
-          setEditModal(false);
-        }}
+        onCameraPress={handleEdit}
         title2={t('liveStockDetails.delete')}
         Icon2={
           <DustbinModal width={moderateScale(24)} height={moderateScale(24)} />
         }
-        onGalleryPress={() => {
-          handleDelete(sentItem);
-          setEditModal(false);
-        }}
+        onGalleryPress={onDeletePress}
         onClose={() => setEditModal(false)}
       />
       <View style={styles.itemHeader}>
@@ -210,11 +213,7 @@ const LiveStockDetails = () => {
   return (
     <View style={styles.main}>
       {isFetching && <CommonLoader visible={isFetching} />}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -227,7 +226,7 @@ const LiveStockDetails = () => {
             {t('profileScreen.livestockDetails')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.keyboardAvoidingView}>
         {error && <CommonText>{error}</CommonText>}
         {livestockData && (

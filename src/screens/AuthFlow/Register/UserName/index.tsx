@@ -8,6 +8,7 @@ import { colors } from '../../../../themes/colors';
 import {
   CommonButton,
   CommonInput,
+  CommonLoader,
   CommonText,
   ScreenWrapper,
 } from '../../../../components';
@@ -22,7 +23,7 @@ import { USERNAME_REGEX } from '../../../../utils/regex';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../redux/store';
 import { checkUserExist } from '../../../../redux/slices/authSlice';
-import Loader from '../../../../components/Loader';
+
 import { Buffer } from 'buffer'; // Available in React Native via polyfill
 import { showToastable } from 'react-native-toastable';
 import FastImage from 'react-native-fast-image';
@@ -94,7 +95,7 @@ const UserNameRegister = () => {
 
   return (
     <ScreenWrapper scrollable={true}>
-      <Loader visible={loading} />
+      <CommonLoader visible={loading} />
       <FastImage
         source={Images.SplashGif}
         style={styles.video}

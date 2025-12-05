@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { View, ImageBackground } from 'react-native';
+import { View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './style';
 import { AppStackParamList } from '../../../../navigation/appNavigator';
-import { CommonText, ScreenWrapper } from '../../../../components';
+import {
+  CommonText,
+  GradientBackground,
+  ScreenWrapper,
+} from '../../../../components';
 import ProfileProgressCard from '../../../../components/ProfileProgressCard';
 import { Images } from '../../../../assets/images';
 import { colors } from '../../../../themes/colors';
@@ -71,11 +75,7 @@ const AddNewLandStep3 = () => {
       style={styles.screenWrapper}
     >
       {/* Header Section */}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.headerBackground}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.headerBackground}>
         <View style={styles.headerContainer}>
           <CommonText style={styles.headerTitle}>
             {t('addCrop.addCrop')}
@@ -90,7 +90,7 @@ const AddNewLandStep3 = () => {
             isFrom={t('addCrop.FormComplete')}
           />
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       {/* Reusable Form Logic */}
       <CropForm

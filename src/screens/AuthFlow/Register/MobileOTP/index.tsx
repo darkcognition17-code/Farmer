@@ -5,7 +5,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import CommonOtpInput from '../../../../components/CommonOtpInput';
 import { screenNames } from '../../../../navigation/screenNames';
 import { colors } from '../../../../themes/colors';
-import { CommonInput, ScreenWrapper } from '../../../../components';
+import {
+  CommonInput,
+  CommonLoader,
+  ScreenWrapper,
+} from '../../../../components';
 import { BackButton, Clock } from '../../../../assets/icons';
 import { scale, verticalScale } from '../../../../utils/responsive';
 import { styles } from './style';
@@ -18,7 +22,7 @@ import {
   setTokens,
   verifyOtp,
 } from '../../../../redux/slices/authSlice';
-import Loader from '../../../../components/Loader';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthStackParamList } from '../../../../navigation/authNavigator';
 import LinearGradient from 'react-native-linear-gradient';
@@ -248,7 +252,7 @@ const MobileOtp = () => {
 
   return (
     <ScreenWrapper scrollable={true}>
-      <Loader visible={isLoading} />
+      <CommonLoader visible={isLoading} />
       <FastImage
         source={Images.SplashGif}
         style={styles.video}

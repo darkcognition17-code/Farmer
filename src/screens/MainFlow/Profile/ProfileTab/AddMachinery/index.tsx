@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
-  ImageBackground,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
@@ -10,6 +9,7 @@ import {
   CommonButton,
   CommonLoader,
   CommonText,
+  GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
@@ -252,11 +252,7 @@ const AddMachinaryScreen = () => {
   if (loadingTypes) {
     return (
       <ScreenWrapper bgColor={colors.transparent}>
-        <ActivityIndicator
-          size="large"
-          color={colors.Primary}
-          style={styles.loader}
-        />
+        <ActivityIndicator color={colors.ButtonColor} style={styles.loader} />
       </ScreenWrapper>
     );
   }
@@ -324,11 +320,7 @@ const AddMachinaryScreen = () => {
   return (
     <ScreenWrapper bgColor={colors.transparent}>
       {currentLoading && <CommonLoader visible={currentLoading} />}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -343,7 +335,7 @@ const AddMachinaryScreen = () => {
               : t('machineryDetails.addMachineryDetails')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.keyboardAvoidingView}>
         <FlatList
           ListFooterComponent={<View style={styles.footerStyle} />}

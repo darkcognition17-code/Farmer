@@ -36,10 +36,9 @@ import {
   forgotResetPassword,
   registerUserName,
 } from '../../../../redux/slices/authSlice';
-import { ScreenWrapper } from '../../../../components';
+import { CommonLoader, ScreenWrapper } from '../../../../components';
 import { showToastable } from 'react-native-toastable';
 import FastImage from 'react-native-fast-image';
-import Loader from '../../../../components/Loader';
 
 type NavigationProp = NativeStackNavigationProp<
   AuthStackParamList,
@@ -228,7 +227,7 @@ const CreatePasswordScreen = () => {
         style={styles.video}
         resizeMode={FastImage.resizeMode.cover}
       />
-      <Loader visible={loading} />
+      <CommonLoader visible={loading} />
 
       <LinearGradient
         style={styles.linearGradient}

@@ -104,7 +104,7 @@ const CommonBottomSelectModal: React.FC<CommonBottomSelectModalProps> = ({
     if (!isLoadingMore) return null;
     return (
       <View style={{ paddingVertical: 20 }}>
-        <ActivityIndicator animating size="large" />
+        <ActivityIndicator animating color={colors.ButtonColor} />
       </View>
     );
   };

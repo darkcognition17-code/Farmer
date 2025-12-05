@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ImageBackground } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import { View, TouchableOpacity } from 'react-native';
+
 import {
   CommonButton,
   ScreenWrapper,
   CommonText,
   CommonLoader,
+  GradientBackground,
 } from '../../../../components';
 import LandFormBody from '../../../../components/LandFormBody'; // Shared Component
 import { Images } from '../../../../assets/images';
@@ -17,6 +16,9 @@ import { showToastable } from 'react-native-toastable';
 import { RootState } from '../../../../redux/store';
 import { BackButton } from '../../../../assets/icons';
 import { moderateScale } from '../../../../utils/responsive';
+import { useTranslation } from 'react-i18next';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const EditLandScreen = () => {
   const { t } = useTranslation();
@@ -100,11 +102,7 @@ const EditLandScreen = () => {
       <CommonLoader visible={loading} />
 
       {/* Standard Header (Simpler than Onboarding) */}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -117,7 +115,7 @@ const EditLandScreen = () => {
             {t('addNewLand.editLand')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       <View style={styles.scrollViewContent}>
         {/* Reuse the exact same form UI */}

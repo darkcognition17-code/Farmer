@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
-  ImageBackground,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
@@ -11,6 +10,7 @@ import {
   CommonInput,
   CommonLoader,
   CommonText,
+  GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
@@ -311,11 +311,7 @@ const AddLiveStock = () => {
   if (loadingTypes) {
     return (
       <ScreenWrapper bgColor={colors.transparent}>
-        <ActivityIndicator
-          size="large"
-          color={colors.Primary}
-          style={styles.loader}
-        />
+        <ActivityIndicator color={colors.ButtonColor} style={styles.loader} />
       </ScreenWrapper>
     );
   }
@@ -334,11 +330,7 @@ const AddLiveStock = () => {
   return (
     <ScreenWrapper bgColor={colors.transparent}>
       {currentLoading && <CommonLoader visible={currentLoading} />}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -353,7 +345,7 @@ const AddLiveStock = () => {
               : t('profileScreen.livestockDetails')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.keyboardAvoidingView}>
         {isEditMode && editableItem ? (
           <View>

@@ -24,11 +24,7 @@ const LandCard = ({ item, navigation, landImage, onEdit }) => {
   const land = item;
 
   return (
-    <TouchableOpacity
-      // onPress={() => navigation.navigate(screenNames.LandDetails, { landDetails: item })}
-      activeOpacity={0.9}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <View key={land.id} style={styles.landCard}>
         {/* Edit / Delete modal */}
         <ImagePickerModal
@@ -100,7 +96,7 @@ const LandCard = ({ item, navigation, landImage, onEdit }) => {
           </View>
         </View>
 
-        {/* Footer */}
+        {/* Footer: Ownership & Area */}
         <View style={styles.landFooter}>
           <CommonText style={styles.ownedLabel}>
             {t(`home.${land?.landType?.toLowerCase()}`)}
@@ -111,7 +107,7 @@ const LandCard = ({ item, navigation, landImage, onEdit }) => {
           </CommonText>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

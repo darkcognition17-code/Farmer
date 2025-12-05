@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
-  ImageBackground,
   ActivityIndicator,
   FlatList,
   LayoutAnimation,
@@ -29,6 +28,7 @@ import {
   UpBlack,
 } from '../../../../../assets/icons/index';
 import { moderateScale } from '../../../../../utils/responsive';
+import { GradientBackground } from '../../../../../components';
 
 // Enable layout animation for Android
 if (
@@ -163,11 +163,7 @@ const AdditionalLinks = () => {
 
   return (
     <ScreenWrapper bgColor={colors.transparent}>
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -178,10 +174,10 @@ const AdditionalLinks = () => {
           </TouchableOpacity>
           <CommonText style={styles.headerTitle}>{title}</CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       {loading ? (
-        <ActivityIndicator size="large" color={colors.Primary} />
+        <ActivityIndicator color={colors.ButtonColor} />
       ) : error ? (
         <CommonText>{error}</CommonText>
       ) : staticContent?.data?.description ? (

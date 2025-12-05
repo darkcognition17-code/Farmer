@@ -18,7 +18,7 @@ import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { Images } from '../assets/images';
 import { ToggleOn, ToggleOff } from '../assets/icons';
-import Loader from './Loader';
+
 import CommonText from './CommonText';
 import CommonButton from './CommonButton';
 import {
@@ -29,6 +29,7 @@ import {
 } from '../utils/responsive'; // Adjust path as needed
 import { fonts } from '../themes/fonts';
 import { colors } from '../themes/colors';
+import { CommonLoader } from '.';
 
 const { width } = Dimensions.get('window');
 const cardMargin = scale(16);
@@ -135,7 +136,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
   return (
     <View style={{ flex: 1 }}>
-      <Loader visible={loading} />
+      <CommonLoader visible={loading} />
 
       {/* Conditionally render Splash Video only for Onboarding */}
       {mode === 'onboarding' && (

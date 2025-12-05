@@ -6,17 +6,17 @@ import {
   FlatList,
   StyleSheet,
   Button,
-  ImageBackground,
   Platform,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import {
   CommonButton,
   CommonInput,
+  CommonLoader,
   CommonText,
+  GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
-import LinearGradient from 'react-native-linear-gradient';
 import CommonDropdown from '../../../../../components/CommonDropdown';
 import {
   BackSideUpload,
@@ -72,7 +72,6 @@ import {
 } from '../../../../../redux/slices/authSlice';
 const SECRET_KEY = 'my_super_secret_key_123!';
 import { Buffer } from 'buffer';
-import Loader from '../../../../../components/Loader';
 
 interface KisaniItem {
   id: string;
@@ -374,13 +373,8 @@ const ProfileSetupStep1 = () => {
     >
       {/* Top Linear Gradient Section (Progress Bar) */}
       {/* Progress Bar and Text */}
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
-        <Loader visible={loading} />
-
+      <CommonLoader visible={loading} />
+      <GradientBackground style={styles.progressHeader}>
         {/* Optional overlay for clarity */}
         {/* <View style={styles.overlay} /> */}
         <CommonText style={styles.headerTitle}>
@@ -396,7 +390,7 @@ const ProfileSetupStep1 = () => {
             isFrom={t('profileSetup.complete')}
           />
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View>
         <View style={styles.contentContainer}>
           {/* My Kisani Didi Dropdown */}

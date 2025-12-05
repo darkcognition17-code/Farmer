@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   View,
-  ImageBackground,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -14,11 +13,12 @@ import {
 import {
   CommonButton,
   CommonInput,
+  CommonLoader,
   CommonText,
   ImagePickerModal,
   ScreenWrapper,
+  GradientBackground,
 } from '../../../../../components';
-import LinearGradient from 'react-native-linear-gradient';
 import CommonDropdown from '../../../../../components/CommonDropdown';
 import ProfileProgressCard from '../../../../../components/ProfileProgressCard';
 import CommonBottomSelectModal from '../../../../../components/CommonBottomSelectModal';
@@ -64,7 +64,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../../redux/store';
 import { submitProfileStep1 } from '../../../../../redux/slices/authSlice';
 import { showToastable } from 'react-native-toastable';
-import Loader from '../../../../../components/Loader';
+
 import {
   MOBILE_NUMBER_REGEX,
   MOBILE_REGEX,
@@ -245,12 +245,8 @@ const ProfileSetupStep3 = () => {
 
   return (
     <ScreenWrapper scrollable={true} style={styles.screenWrapper}>
-      <Loader visible={loading} />
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.headerBackground}
-        resizeMode="cover"
-      >
+      <CommonLoader visible={loading} />
+      <GradientBackground style={styles.headerBackground}>
         <CommonText style={styles.headerTitle} variant="title">
           {t('contactDetailScreen.header')}
         </CommonText>
@@ -265,7 +261,7 @@ const ProfileSetupStep3 = () => {
             isFrom={t('profileSetup.complete')}
           />
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       <View style={styles.container}>
         {/* Upload Photo Card */}

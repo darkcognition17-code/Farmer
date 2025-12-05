@@ -4,10 +4,9 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  ImageBackground,
   Platform,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { GradientBackground } from '.';
 import { colors } from '../themes/colors';
 import {
   moderateScale,
@@ -29,6 +28,15 @@ interface ProfileHeaderProps {
   mainTitle?: string;
 }
 
+// const ProfileHeader: React.FC<ProfileHeaderProps> = ({
+//   name,
+//   imageUri,
+//   onEditPress,
+//   navigation,
+//   isShowBackButton,
+//   mainTitle,
+// }) => {
+
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   name,
   imageUri,
@@ -38,11 +46,9 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   mainTitle,
 }) => {
   return (
-    <ImageBackground
-      source={Images.GrBg}
+    <GradientBackground
       imageStyle={styles.imageBackground}
       style={styles.progressHeader}
-      resizeMode="cover"
     >
       {isShowBackButton && (
         <TouchableOpacity
@@ -77,7 +83,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         </View>
         <CommonText style={styles.userName}>{name}</CommonText>
       </View>
-    </ImageBackground>
+    </GradientBackground>
   );
 };
 

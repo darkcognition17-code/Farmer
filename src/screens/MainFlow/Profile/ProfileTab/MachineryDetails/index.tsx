@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
-  ImageBackground,
   FlatList,
   ActivityIndicator,
   RefreshControl,
@@ -12,6 +11,7 @@ import {
 import {
   CommonButton,
   CommonText,
+  GradientBackground,
   ImagePickerModal,
   ScreenWrapper,
 } from '../../../../../components';
@@ -248,7 +248,16 @@ const MachineryDetails = () => {
 
   const renderFooter = () => {
     if (!loadingMore) return null;
-    return <ActivityIndicator style={styles.loader} />;
+    return (
+      <ActivityIndicator color={colors.ButtonColor} style={styles.loader} />
+    );
+  };
+
+  const handleEdit = () => {
+    navigation.navigate(screenNames.EditMachinery, {
+      item: sentItem,
+    });
+    setEditModal(false);
   };
 
   const renderList = ({ item }) => (
@@ -273,12 +282,7 @@ const MachineryDetails = () => {
             height={moderateScale(24)}
           />
         }
-        onCameraPress={() => {
-          navigation.navigate(screenNames.EditMachinery, {
-            item: sentItem,
-          });
-          setEditModal(false);
-        }}
+        onCameraPress={handleEdit}
         title2={t('liveStockDetails.delete')}
         Icon2={
           <DustbinModal width={moderateScale(24)} height={moderateScale(24)} />
@@ -314,11 +318,7 @@ const MachineryDetails = () => {
 
   return (
     <View style={styles.main}>
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -331,7 +331,7 @@ const MachineryDetails = () => {
             {t('profileScreen.machineryDetails')}
           </CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.keyboardAvoidingView}>
         {error && <CommonText>{error}</CommonText>}
         {machinaryData && (

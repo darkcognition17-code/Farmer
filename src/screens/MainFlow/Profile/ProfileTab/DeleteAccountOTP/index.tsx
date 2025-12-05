@@ -5,13 +5,17 @@ import {
   Alert,
   Image,
   Platform,
-  ImageBackground,
 } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import CommonOtpInput from '../../../../../components/CommonOtpInput';
 import { screenNames } from '../../../../../navigation/screenNames';
-import { CommonInput, ScreenWrapper } from '../../../../../components';
+import {
+  CommonInput,
+  CommonLoader,
+  GradientBackground,
+  ScreenWrapper,
+} from '../../../../../components';
 import { BackButton, Clock } from '../../../../../assets/icons';
 import {
   moderateScale,
@@ -29,7 +33,7 @@ import {
   setTokens,
   verifyOtp,
 } from '../../../../../redux/slices/authSlice';
-import Loader from '../../../../../components/Loader';
+
 import LinearGradient from 'react-native-linear-gradient';
 import CommonModal from '../../../../../components/CommonModal';
 import Toast from 'react-native-simple-toast';
@@ -130,12 +134,8 @@ const DeleteAccountOTP = () => {
       bgColor={colors.transparent}
       style={styles.screenWrapperContainer}
     >
-      <Loader visible={isLoading} />
-      <ImageBackground
-        source={Images.GrBg}
-        imageStyle={styles.imageBackgroundStyle}
-        resizeMode="cover"
-      >
+      <CommonLoader visible={isLoading} />
+      <GradientBackground imageStyle={styles.imageBackgroundStyle}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -145,7 +145,7 @@ const DeleteAccountOTP = () => {
             <BackButton width={moderateScale(10)} height={moderateScale(15)} />
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       <View style={styles.backgroundGradient}>
         <View style={styles.container}>

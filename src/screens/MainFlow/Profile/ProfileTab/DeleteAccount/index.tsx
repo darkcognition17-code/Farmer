@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  ImageBackground,
-  ScrollView,
-} from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './style.js';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -23,6 +18,7 @@ import {
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
 import CommonButton from '../../../../../components/CommonButton';
 import { screenNames } from '../../../../../navigation/screenNames';
+import { GradientBackground } from '../../../../../components';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -38,11 +34,7 @@ const DeletAccount = () => {
       bgColor={colors.transparent}
       style={styles.screenWrapperContainer}
     >
-      <ImageBackground
-        source={Images.GrBg}
-        imageStyle={styles.imageBackgroundStyle}
-        resizeMode="cover"
-      >
+      <GradientBackground imageStyle={styles.imageBackgroundStyle}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -53,7 +45,7 @@ const DeletAccount = () => {
           </TouchableOpacity>
           <CommonText style={styles.headerTitle}>Delete Account</CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <View style={styles.scrollContainer}>
         <View>
           <CommonText style={styles.title}>

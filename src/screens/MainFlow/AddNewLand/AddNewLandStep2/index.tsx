@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { View, ImageBackground, TouchableOpacity } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { styles } from './style';
-import { AppStackParamList } from '../../../../navigation/appNavigator';
-import ProfileProgressCard from '../../../../components/ProfileProgressCard';
-import { screenNames } from '../../../../navigation/screenNames';
+import React, { useMemo, useState } from 'react';
+import { View } from 'react-native';
+
 import {
   CommonButton,
   CommonText,
   ScreenWrapper,
-  CommonBottomSelectModal,
+  CommonLoader,
+  GradientBackground,
 } from '../../../../components';
 import { Images } from '../../../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../redux/store';
-import {
-  getLocationList,
-  submitAddLand,
-} from '../../../../redux/slices/authSlice';
-import { Buffer } from 'buffer';
-import Loader from '../../../../components/Loader';
+import { submitAddLand } from '../../../../redux/slices/authSlice';
 import { AuthStackParamList } from '../../../../navigation/authNavigator';
 import AddressForm from '../../../../components/AddressForm';
+import { useAddressLogic } from '../../../../hooks/useAddressLogic'; // Make sure this path is correct
+import { useTranslation } from 'react-i18next';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { AppStackParamList } from '../../../../navigation/appNavigator';
+import ProfileProgressCard from '../../../../components/ProfileProgressCard';
+import { styles } from './style';
+import { screenNames } from '../../../../navigation/screenNames';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -33,336 +31,157 @@ type AddLandScreenRouteProp = RouteProp<AuthStackParamList, 'Addland2'>;
 
 const AddNewLandStep2 = () => {
   const navigation = useNavigation<NavigationProp>();
-
   const { t } = useTranslation();
-
-  const [completeAddress, setCompleteAddress] = useState('');
-
-  const [pincode, setPincode] = useState('');
-
-  const [village, setVillage] = useState('');
-  const [mandal, setMandal] = useState('');
-
-  const [showState, setShowState] = useState(false);
-
-  const [selectState, setSelectState] = useState<any>(null);
-
-  const [showDistrictModal, setShowDistrictModal] = useState(false);
-
-  const [selectedDistrict, setSelectedDistrict] = useState<any>(null);
-  const [selectedVillage, setSelectedVillage] = useState<any>(null);
-
-  const [showMandal, setshowMandal] = useState(false);
-  const [showVillage, setShowVillage] = useState(false);
-
-  const [selectedMandal, setSelectedMandal] = useState<any>(null);
-
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const [stateArray, setStateArray] = useState<any>([]);
-
-  const [districtArray, setDistrictArray] = useState<any>([]);
-
-  const [mondalArray, setMondalArray] = useState<any>([]);
-
-  const [villageArray, setVillageArray] = useState<any>([]);
-
-  const [loading, setLoading] = useState(false);
-
-  const [page, setPage] = useState(1);
-
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-
-  const [searchQuery, setSearchQuery] = useState('');
-
   const dispatch = useDispatch<AppDispatch>();
-
-  const token = useSelector((state: RootState) => state.auth.accessToken);
   const { params } = useRoute<AddLandScreenRouteProp>();
   const { PayloadStep1 } = params;
+  const token = useSelector((state: RootState) => state.auth.accessToken);
 
-  const validateForm = () => {
-    if (!completeAddress.trim()) return false;
-    if (!pincode.trim() || !/^[0-9]{6}$/.test(pincode)) return false;
-    if (!selectState) return false;
+  // 1. Initialize the Hook
+  const { formState, ui } = useAddressLogic(null);
+
+  // 2. Destructure State with CORRECT names
+  const {
+    completeAddress, // Hook returns this, NOT addressLine
+    setCompleteAddress,
+    pincode,
+    setPincode,
+    selectedStateObj, // Hook returns this, NOT selectedState
+    setSelectedStateObj,
+    selectedDistrict,
+    setSelectedDistrict,
+    selectedMandal,
+    setSelectedMandal,
+    selectedVillage,
+    setSelectedVillage,
+    mandalText,
+    setMandalText,
+    villageText,
+    setVillageText,
+  } = formState;
+
+  // Local loading state for submission
+  const [submitting, setSubmitting] = useState(false);
+
+  // 3. Validation Logic
+  const isFormValid = useMemo(() => {
+    // FIX: Check completeAddress (not addressLine)
+    if (!completeAddress || !completeAddress.trim()) return false;
+
+    if (!pincode || !pincode.trim() || !/^[0-9]{6}$/.test(pincode))
+      return false;
+    if (!selectedStateObj) return false;
     if (!selectedDistrict) return false;
 
-    // --- CASE 1: Mandal = Other ---
-    if (selectedMandal?.name === 'Other' && selectedMandal) {
-      // Village is auto-set to Other → no input required
-      return true;
-    } else if (selectedMandal?.name != 'Other' && !selectedMandal) {
-      return false;
+    // Mandal Validation
+    if (!selectedMandal) return false;
+
+    if (selectedMandal.name === 'Other') {
+      return true; // Usually implies manual entry is allowed/handled elsewhere
     }
 
-    // --- CASE 2: Mandal != Other ---
+    // Village Validation
     if (!selectedVillage) return false;
-    // if village = Other → village text must be entered
-    else if (selectedVillage?.name === 'Other' && !village.trim()) {
+
+    if (
+      selectedVillage.name === 'Other' &&
+      (!villageText || !villageText.trim())
+    ) {
       return false;
     }
 
     return true;
-  };
-
-  useEffect(() => {
-    setIsFormValid(validateForm());
   }, [
     completeAddress,
-
     pincode,
-
-    selectState,
-
+    selectedStateObj,
     selectedDistrict,
-
     selectedMandal,
-
     selectedVillage,
+    villageText,
   ]);
 
-  const handleContinue = () => {
-    if (validateForm()) {
-      handleAddNewLandStep2();
-
-      // navigation?.navigate(screenNames.AddNewLandStep3);
-    }
-  };
-
-  useEffect(() => {
-    if (!showState && !showDistrictModal && !showMandal && !showVillage) return;
-
-    const currentType = showState
-      ? 'state'
-      : showDistrictModal
-        ? 'district'
-        : showMandal
-          ? 'city'
-          : showVillage
-            ? 'village'
-            : '';
-
-    const currentParentId = showState
-      ? ''
-      : showDistrictModal
-        ? selectState?.id
-        : showMandal
-          ? selectedDistrict?.id
-          : showVillage
-            ? selectedMandal?.id
-            : '';
-
-    const debounce = setTimeout(() => {
-      // If search query is empty, and there's no selected parent (e.g., initial state fetch)
-      // or if search query is not empty and has changed,
-      // reset pagination and fetch new data.
-      if (
-        (searchQuery === '' && page === 1 && currentType) ||
-        (searchQuery !== '' && currentType)
-      ) {
-        resetPagination();
-        getLocationData(1, false, currentType, currentParentId, searchQuery);
-      }
-    }, 500);
-
-    return () => clearTimeout(debounce);
-  }, [
-    searchQuery,
-    showState,
-    showDistrictModal,
-    showMandal,
-    showVillage,
-    selectState?.id,
-    selectedDistrict?.id,
-    selectedMandal?.id,
-  ]);
-  const handleAddNewLandStep2 = async () => {
-    try {
-      setLoading(true);
-
-      // const timeout = setTimeout(() => {
-      //   setLoading(false);
-
-      //   showToastable({ message: 'Network timeout', status: 'danger' });
-      // }, 15000);
-
-      // const response = await dispatch(verifyOtp({ otp: '123456', tempToken: tempToken,deviceId : "fff" })).unwrap(); // ✅ unwrap to get API response directly
-
-      let payload: any = {
-        addressLine: completeAddress,
-        stateId: selectState?.id,
-        districtId: selectedDistrict?.id,
-        pincode: pincode,
-        ...PayloadStep1,
-      };
-      //console.log('payload-----------', payload);
-
-      // 🔥 Mandal handling
-      if (selectedMandal?.name === 'Other') {
-        payload.otherMandalName = mandal;
-      } else {
-        payload.mandalId = selectedMandal?.id;
-      }
-
-      // 🔥 Village handling
-      if (selectedMandal?.name === 'Other') {
-        payload.otherVillageName = village;
-      } else {
-        payload.villageId = selectedVillage?.id;
-      }
-      const response = await dispatch(
-        submitAddLand({
-          payload,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }),
-      ).unwrap();
-
-      //console.log('response----c----------  ', response);
-
-      // clearTimeout(timeout);
-
-      setLoading(false);
-
-      if (response?.statusCode == 200) {
-        setLoading(false);
-
-        navigation.navigate(screenNames.AddNewLandStep3, {
-          landDetails: response?.data,
-        });
-      }
-
-      setLoading(false);
-    } catch (err: any) {
-      // showToastable({ message: err, status: 'danger' });
-
-      setLoading(false);
-    }
-  };
-
-  const resetPagination = () => {
-    setPage(1);
-    setHasMore(true);
-    setIsLoadingMore(false);
-  };
-
-  const getLocationData = async (
-    pageNumber = 1,
-    append = false,
-    type = '',
-    parentId = '',
-    search = '',
-  ) => {
-    if (isLoadingMore || !hasMore) return;
-    if (pageNumber > 1) {
-      setIsLoadingMore(true);
-    } else {
-      setLoading(true);
-    }
-    const tokenBasic = Buffer.from(
-      `${'mysecret'}:${'password'}`,
-      'utf8',
-    ).toString('base64');
-
-    try {
-      const response = await dispatch(
-        getLocationList({
-          payload: {
-            page: pageNumber,
-            limit: 10,
-            type: type,
-            parentId: parentId,
-            name: search,
-          },
-          headers: { Authorization: `Basic ${tokenBasic}` },
-        }),
-      ).unwrap();
-
-      if (pageNumber > 1) {
-        setIsLoadingMore(false);
-      } else {
-        setLoading(false);
-      }
-
-      if (response?.statusCode === 200) {
-        const newData = response?.data || []; // adjust key based on your API response
-        const locationSetter =
-          type === 'state'
-            ? setStateArray
-            : type === 'district'
-              ? setDistrictArray
-              : type === 'village'
-                ? setVillageArray
-                : setMondalArray;
-        locationSetter(prev => (append ? [...prev, ...newData] : newData));
-        setPage(response?.nextPage);
-        setHasMore(response?.nextPage !== -1);
-
-        const newItem = {
-          id: '',
-          name: 'Other',
-          parentId: '',
-          type: 'village',
-        };
-
-        const newItemMandal = {
-          id: '',
-          name: 'Other',
-          parentId: '',
-          type: 'city',
-        };
-        if (!append) {
-          setVillageArray(prev => [...prev, newItem]);
-          setMondalArray(prev => [...prev, newItemMandal]);
-        }
-      }
-    } catch (err: any) {
-      if (pageNumber > 1) {
-        setIsLoadingMore(false);
-      } else {
-        setLoading(false);
-      }
-      //console.log('Kisani API Error:', err);
-    }
-  };
-
+  // 4. Progress Calculation
   const calculateProgress = (currentStep: number, totalSteps: number = 3) => {
     let filled = 0;
     const totalFields = 6;
 
     if (completeAddress) filled++;
     if (pincode && /^\d{6}$/.test(pincode)) filled++;
-    if (selectState) filled++;
+    if (selectedStateObj) filled++;
     if (selectedDistrict) filled++;
+
     if (selectedMandal) {
       if (selectedMandal.name === 'Other') {
-        if (village) filled++;
+        if (villageText) filled++;
       } else {
         filled++;
       }
     }
-    if (village) filled++;
+    if (selectedVillage || villageText) filled++;
 
-    // internal progress (0 → 1)
     const stepProgress = filled / totalFields;
-
-    // add step offset (each step covers 1 / totalSteps of total progress)
     const stepOffset = (currentStep - 1) / totalSteps;
-
-    // total global progress
     return stepOffset + stepProgress / totalSteps;
+  };
+
+  // 5. Submission Handler
+  const handleContinue = async () => {
+    if (!isFormValid) return;
+
+    try {
+      setSubmitting(true);
+
+      let payload: any = {
+        addressLine: completeAddress, // API likely expects 'addressLine', map it here
+        stateId: selectedStateObj?.id,
+        districtId: selectedDistrict?.id,
+        pincode: pincode,
+        ...PayloadStep1,
+      };
+
+      // Mandal Logic
+      if (selectedMandal?.name === 'Other') {
+        payload.otherMandalName = mandalText;
+        payload.otherVillageName = villageText;
+      } else {
+        payload.mandalId = selectedMandal?.id;
+
+        // Village Logic
+        if (selectedVillage?.name === 'Other') {
+          payload.otherVillageName = villageText;
+        } else {
+          payload.villageId = selectedVillage?.id;
+        }
+      }
+
+      const response = await dispatch(
+        submitAddLand({
+          payload,
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ).unwrap();
+
+      if (response?.statusCode == 200) {
+        navigation.navigate(screenNames.AddNewLandStep3, {
+          landDetails: response?.data,
+        });
+      }
+    } catch (err: any) {
+      console.error(err);
+      // Optional: showToastable({ message: err.message, status: 'danger' });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <ScreenWrapper scrollable style={styles.screenWrapper}>
-      <Loader visible={loading} />
-      <ImageBackground
-        source={Images.GrBg}
+      <CommonLoader visible={submitting || (ui.loading && !ui.isLoadingMore)} />
+
+      <GradientBackground
         imageStyle={styles.imageBackground}
         style={styles.progressHeader}
-        resizeMode="cover"
       >
         <View style={styles.headerContainer}>
           <CommonText style={styles.headerTitle}>
@@ -378,31 +197,35 @@ const AddNewLandStep2 = () => {
             isFrom={t('addCrop.FormComplete')}
           />
         </View>
-      </ImageBackground>
+      </GradientBackground>
 
       <View style={styles.formContainer}>
         <CommonText style={styles.sectionTitle}>
           {t('addNewLand.landLocationDetails')}
         </CommonText>
 
-        {/* USE REUSABLE COMPONENT */}
+        {/* AddressForm uses its own internal logic (useLocationData) for fetching lists,
+            so we only need to pass the State and Setters from our hook.
+        */}
         <AddressForm
+          // Map 'completeAddress' from hook to 'address' prop in component
           address={completeAddress}
           setAddress={setCompleteAddress}
           pincode={pincode}
           setPincode={setPincode}
-          selectedState={selectState}
-          setSelectedState={setSelectState}
+          // Map 'selectedStateObj' from hook to 'selectedState' prop
+          selectedState={selectedStateObj}
+          setSelectedState={setSelectedStateObj}
           selectedDistrict={selectedDistrict}
           setSelectedDistrict={setSelectedDistrict}
           selectedMandal={selectedMandal}
           setSelectedMandal={setSelectedMandal}
           selectedVillage={selectedVillage}
           setSelectedVillage={setSelectedVillage}
-          mandalText={mandal}
-          setMandalText={setMandal}
-          villageText={village}
-          setVillageText={setVillage}
+          mandalText={mandalText}
+          setMandalText={setMandalText}
+          villageText={villageText}
+          setVillageText={setVillageText}
           isEditMode={false}
         />
       </View>
@@ -415,110 +238,6 @@ const AddNewLandStep2 = () => {
           disabled={!isFormValid}
         />
       </View>
-
-      <CommonBottomSelectModal
-        isVisible={showState}
-        title={t('addressDetailScreen.selectStatePlaceholder')}
-        subDetails=""
-        data={stateArray}
-        mode="document"
-        showSearchBar={true}
-        onSearch={setSearchQuery}
-        searchValue={searchQuery}
-        onSelect={item => {
-          setSelectState(item);
-          setDistrictArray([]); // ⛔ stop old data flash
-          setSelectedDistrict(null);
-          setSelectedMandal(null);
-          setVillage('');
-          setSearchQuery(''); // must set AFTER closing
-          setShowState(false);
-        }}
-        onClose={() => setShowState(false)}
-        onEndReached={() =>
-          getLocationData(page, true, 'state', '', searchQuery)
-        }
-        hasMore={hasMore}
-        isLoadingMore={isLoadingMore}
-      />
-
-      <CommonBottomSelectModal
-        isVisible={showDistrictModal}
-        title={t('addressDetailScreen.selectDistrictPlaceholder')}
-        subDetails=""
-        data={districtArray}
-        mode="document"
-        showSearchBar={true}
-        onSearch={setSearchQuery}
-        searchValue={searchQuery}
-        onSelect={item => {
-          setSelectedDistrict(item);
-          setMondalArray([]); // ⛔ clear to avoid UI flash
-          setSelectedMandal(null);
-          setVillage('');
-          setSearchQuery('');
-          setShowDistrictModal(false);
-        }}
-        onClose={() => setShowDistrictModal(false)}
-        onEndReached={() =>
-          getLocationData(page, true, 'district', selectState?.id, searchQuery)
-        }
-        hasMore={hasMore}
-        isLoadingMore={isLoadingMore}
-      />
-
-      <CommonBottomSelectModal
-        isVisible={showMandal}
-        title={t('addressDetailScreen.selectMandalPlaceholder')}
-        subDetails=""
-        data={mondalArray}
-        mode="document"
-        showSearchBar={true}
-        onSearch={setSearchQuery}
-        searchValue={searchQuery}
-        onSelect={item => {
-          setSelectedMandal(item);
-          setVillageArray([]); // ⛔ clear to avoid showing old list
-          setSelectedVillage(null);
-          setVillage('');
-          setSearchQuery('');
-          setshowMandal(false);
-        }}
-        onClose={() => setshowMandal(false)}
-        onEndReached={() =>
-          getLocationData(page, true, 'city', selectedDistrict?.id, searchQuery)
-        }
-        hasMore={hasMore}
-        isLoadingMore={isLoadingMore}
-      />
-
-      <CommonBottomSelectModal
-        isVisible={showVillage}
-        title={t('addressDetailScreen.selectVillagePlaceholder')}
-        subDetails=""
-        data={villageArray}
-        mode="document"
-        showSearchBar={true}
-        onSearch={setSearchQuery}
-        searchValue={searchQuery}
-        onSelect={item => {
-          setSelectedVillage(item);
-          setShowVillage(false);
-          setSearchQuery('');
-        }}
-        onClose={() => setShowVillage(false)}
-        onEndReached={() =>
-          getLocationData(
-            page,
-            true,
-            'village',
-            selectedMandal?.id,
-            searchQuery,
-          )
-        }
-        hasMore={hasMore}
-        isLoadingMore={isLoadingMore}
-      />
     </ScreenWrapper>
   );
 };

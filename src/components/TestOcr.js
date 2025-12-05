@@ -218,7 +218,7 @@ const OCRModal = ({ visible, onClose }) => {
                 disabled={loading}
               >
                 {loading ? (
-                  <ActivityIndicator color={colors.white} />
+                  <ActivityIndicator color={colors.ButtonColor} />
                 ) : (
                   <Text style={styles.buttonText}>
                     {i18n.t('ocr.recognizeTextButton')}

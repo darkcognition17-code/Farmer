@@ -4,13 +4,16 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  ImageBackground,
   Platform,
   Linking,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { CommonText, ScreenWrapper } from '../../../components';
+import {
+  CommonText,
+  GradientBackground,
+  ScreenWrapper,
+} from '../../../components';
 import { colors } from '../../../themes/colors';
 import {
   moderateScale,
@@ -40,7 +43,6 @@ import { RootState } from '../../../redux/store';
 import { fetchLandList } from '../../../redux/slices/authSlice';
 import { screenNames } from '../../../navigation/screenNames';
 import { AppStackParamList } from '../../../navigation/appNavigator';
-import LandCard from '../../../components/LandCard';
 import CommonLandCard from '../../../components/CommonLandCard';
 
 interface Land {
@@ -133,10 +135,7 @@ const MyRegisterLand = () => {
   return (
     <>
       <ScreenWrapper bgColor={colors.transparent}>
-        <ImageBackground
-          source={Images.GrBg}
-          imageStyle={styles.headerImageStyle}
-        >
+        <GradientBackground imageStyle={styles.headerImageStyle}>
           <View style={styles.headerContent}>
             <View style={styles.headerContentSub}>
               <TouchableOpacity
@@ -154,7 +153,7 @@ const MyRegisterLand = () => {
               </CommonText>
             </View>
           </View>
-        </ImageBackground>
+        </GradientBackground>
 
         <View style={styles.container}>
           <FlatList

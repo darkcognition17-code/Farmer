@@ -37,10 +37,10 @@ import {
   sendOtpSignup,
   setTokens,
 } from '../../../redux/slices/authSlice';
-import { ScreenWrapper } from '../../../components';
+import { CommonLoader, ScreenWrapper } from '../../../components';
 import { showToastable } from 'react-native-toastable';
 import FastImage from 'react-native-fast-image';
-import Loader from '../../../components/Loader';
+
 import { MOBILE_NUMBER_REGEX } from '../../../utils/regex';
 
 const LoginScreen = ({ navigation }: any) => {
@@ -196,7 +196,7 @@ const LoginScreen = ({ navigation }: any) => {
         style={styles.video}
         resizeMode={FastImage.resizeMode.cover}
       />
-      <Loader visible={loading} />
+      <CommonLoader visible={loading} />
 
       <LinearGradient
         style={styles.linearGradient}

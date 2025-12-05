@@ -145,9 +145,7 @@ const styles = StyleSheet.create({
     color: colors.CropCountGreen,
     fontWeight: '700',
   },
-  noCount: {
-    color: colors.Secondary,
-  },
+  noCount: { color: colors.Secondary },
   landFooter: {
     marginTop: moderateScale(25),
     marginBottom: moderateScale(5),

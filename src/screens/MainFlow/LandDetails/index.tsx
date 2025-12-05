@@ -3,7 +3,6 @@ import {
   View,
   ScrollView,
   Alert,
-  ImageBackground,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
@@ -51,7 +50,11 @@ import {
   getFarmerLandCrop,
 } from '../../../redux/slices/authSlice';
 import { AppStackParamList } from '../../../navigation/appNavigator';
-import { CommonText, ProfileInfoCard } from '../../../components';
+import {
+  CommonText,
+  GradientBackground,
+  ProfileInfoCard,
+} from '../../../components';
 import { styles } from './style';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '../../../redux/store';
@@ -157,11 +160,7 @@ const LandDetails = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <ImageBackground
-        source={Images.GrBg}
-        style={styles.progressHeader}
-        resizeMode="cover"
-      >
+      <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -172,7 +171,7 @@ const LandDetails = () => {
           </TouchableOpacity>
           <CommonText style={styles.headerTitle}>{'Land Details'}</CommonText>
         </View>
-      </ImageBackground>
+      </GradientBackground>
       <LandCard
         item={landDetails}
         navigation={navigation}

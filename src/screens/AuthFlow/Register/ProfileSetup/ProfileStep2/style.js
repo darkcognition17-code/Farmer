@@ -14,6 +14,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerTitle: {
+    marginTop: moderateScale(60),
+    fontSize: moderateScale(18),
+    color: colors.black,
+    fontWeight: 'bold',
+  },
+  imageBackground: {
+    resizeMode: 'cover',
+    height: moderateScale(219),
+  },
   progressContent: {
     width: '95%',
     alignSelf: 'center',
@@ -43,7 +53,7 @@ export const styles = StyleSheet.create({
     fontSize: scaledFontSize(15),
   },
   pincodeIcon: {
-    top: moderateScale(6) 
+    top: moderateScale(6),
   },
   inputContainer: {
     // paddingLeft: scale(40),
@@ -68,15 +78,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  imageBackground: {
-    resizeMode: 'cover',
-    height: moderateScale(219),
-  },
-  headerTitle: {
-    marginTop: moderateScale(60),
-    fontSize: moderateScale(18),
-    color: colors.black,
-    fontWeight: 'bold',
-  },
-  bottomGap:{ paddingBottom: moderateScale(50) }
+
+  bottomGap: { paddingBottom: moderateScale(50) },
 });

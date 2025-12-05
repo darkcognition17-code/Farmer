@@ -23,6 +23,7 @@ import { colors } from '../../../../themes/colors';
 import {
   CommonButton,
   CommonInput,
+  CommonLoader,
   CommonText,
   ScreenWrapper,
 } from '../../../../components';
@@ -39,7 +40,7 @@ import {
 } from '../../../../redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../redux/store';
-import Loader from '../../../../components/Loader';
+
 import { MOBILE_REGEX } from '../../../../utils/regex';
 import { showToastable } from 'react-native-toastable';
 import FastImage from 'react-native-fast-image';
@@ -167,7 +168,7 @@ const MobileRegister = () => {
 
   return (
     <ScreenWrapper scrollable={true}>
-      <Loader visible={loading} />
+      <CommonLoader visible={loading} />
       <FastImage
         source={Images.SplashGif}
         style={styles.video}

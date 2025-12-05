@@ -71,7 +71,7 @@ const WeatherScreen = () => {
   if (loading) {
     return (
       <ScreenWrapper style={styles.center}>
-        <ActivityIndicator size="large" color={colors.ActivityIndicatorColor} />
+        <ActivityIndicator color={colors.ButtonColor} />
       </ScreenWrapper>
     );
   }
