@@ -186,8 +186,8 @@ const MobileRegister = () => {
               style={styles.backButton}
             >
               <BackButton
-                width={scale(15)}
-                height={scale(15)}
+                width={moderateScale(10)}
+                height={moderateScale(15)}
                 style={styles.backButtonComponent}
               />
             </TouchableOpacity>

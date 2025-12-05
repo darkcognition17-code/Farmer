@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import { GradientBackground } from '.';
+import { CommonBackButton, GradientBackground } from '.';
 import { colors } from '../themes/colors';
 import {
   moderateScale,
@@ -14,7 +14,7 @@ import {
   verticalScale,
 } from '../utils/responsive';
 import CommonText from '../components/CommonText';
-import { BackButton, EditPencilIcon } from '../assets/icons'; // your edit icon
+import { EditPencilIcon } from '../assets/icons'; // your edit icon
 import { Images } from '../assets/images';
 import { fonts } from '../themes/fonts';
 import { IMAGE_BASE_URL } from '../utils/helperFunction';
@@ -27,15 +27,6 @@ interface ProfileHeaderProps {
   isShowBackButton?: boolean;
   mainTitle?: string;
 }
-
-// const ProfileHeader: React.FC<ProfileHeaderProps> = ({
-//   name,
-//   imageUri,
-//   onEditPress,
-//   navigation,
-//   isShowBackButton,
-//   mainTitle,
-// }) => {
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   name,
@@ -51,13 +42,10 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
       style={styles.progressHeader}
     >
       {isShowBackButton && (
-        <TouchableOpacity
+        <CommonBackButton
           onPress={() => navigation.goBack()}
-          activeOpacity={0.8}
           style={styles.bell}
-        >
-          <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-        </TouchableOpacity>
+        />
       )}
       <CommonText style={styles.title}>{mainTitle ?? ''}</CommonText>
 

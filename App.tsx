@@ -18,7 +18,6 @@ const SyncLanguage: React.FC = () => {
   Appearance.setColorScheme('light'); // ✅ React Native 0.73+ only
 
   useEffect(() => {
-
     if (language) {
       i18n.changeLanguage(language);
     }
@@ -50,12 +49,11 @@ const App = () => {
       </Provider>
       <NetStatus />
     </GestureHandlerRootView>
-
   );
 };
 
 export default App;
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, }
-})
+  mainContainer: { flex: 1 },
+});

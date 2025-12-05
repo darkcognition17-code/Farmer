@@ -11,17 +11,14 @@ import {
   CommonButton,
   CommonLoader,
   CommonText,
+  CommonBackButton,
   GradientBackground,
-  ImagePickerModal,
   ScreenWrapper,
+  CommonDetailsCard,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
 import {
-  BackButton,
-  DustbinModal,
   DustbinRed,
-  EditModalPencil,
-  EditPencilIcon,
   Livestock,
   User,
 } from '../../../../../assets/icons';
@@ -45,7 +42,6 @@ import {
 import { showToastable } from 'react-native-toastable';
 
 import { AppDispatch, RootState } from '../../../../../redux/store';
-import { SvgUri } from 'react-native-svg';
 import { IMAGE_BASE_URL } from '../../../../../utils/helperFunction';
 import ColoredSvg from '../../../../../components/ColoredSvg';
 
@@ -140,88 +136,41 @@ const LiveStockDetails = () => {
     }
   };
 
-  const onDeletePress = () => {
-    handleDelete(sentItem);
+  const onDeletePress = (item: any) => { // Modified to accept item
+    handleDelete(item);
     setEditModal(false);
   };
-  const handleEdit = () => {
+  const handleEdit = (item: any) => { // Modified to accept item
     navigation.navigate(screenNames.AddLiveStockScreen, {
-      item: sentItem,
+      item: item,
     });
     setEditModal(false);
   };
 
-  const renderUserLiveStock = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <TouchableOpacity
-        onPress={() => {
-          setEditModal(true);
-          setSentItem(item);
-        }}
-        activeOpacity={0.8}
-        style={styles.editButton}
-      >
-        <EditPencilIcon height={moderateScale(16)} width={moderateScale(16)} />
-      </TouchableOpacity>
-      <ImagePickerModal
-        visible={editModal}
-        cancelable={false}
-        title1={t('liveStockDetails.editDetails')}
-        Icon1={
-          <EditModalPencil
-            width={moderateScale(24)}
-            height={moderateScale(24)}
-          />
-        }
-        onCameraPress={handleEdit}
-        title2={t('liveStockDetails.delete')}
-        Icon2={
-          <DustbinModal width={moderateScale(24)} height={moderateScale(24)} />
-        }
-        onGalleryPress={onDeletePress}
-        onClose={() => setEditModal(false)}
-      />
-      <View style={styles.itemHeader}>
-        {item?.imageUrl && (
-          <View style={styles.itemIconContainer}>
-            <ColoredSvg
-              uri={IMAGE_BASE_URL + item?.imageUrl}
-              color={colors.LiveStockName}
-              size={moderateScale(21)}
-            />
-          </View>
-        )}
-        <CommonText style={styles.itemName}>{item.name}</CommonText>
-      </View>
-      <View style={styles.itemDetailsContainer}>
-        {item.name === t('machineryTypes.others') ? (
-          <CommonText style={styles.quantityText}>{item.notes}</CommonText>
-        ) : (
-          <>
-            <CommonText style={styles.totalText}>
-              {t('liveStockDetails.total')}
-            </CommonText>
-            <CommonText style={styles.quantityText}>
-              {item.count} {item.name}
-            </CommonText>
-          </>
-        )}
-      </View>
-    </View>
-  );
+  const renderLiveStockDetails = (item: any) => {
+    return item.name === t('machineryTypes.others') ? (
+      <CommonText style={styles.quantityText}>{item.notes}</CommonText>
+    ) : (
+      <>
+        <CommonText style={styles.totalText}>
+          {t('liveStockDetails.total')}
+        </CommonText>
+        <CommonText style={styles.quantityText}>
+          {item.count} {item.name}
+        </CommonText>
+      </>
+    );
+  };
 
   return (
     <View style={styles.main}>
       {isFetching && <CommonLoader visible={isFetching} />}
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('profileScreen.livestockDetails')}
           </CommonText>
@@ -268,7 +217,20 @@ const LiveStockDetails = () => {
             data={livestockData?.data?.livestock}
             keyExtractor={key => key.id}
             contentContainerStyle={styles.flatlistContent}
-            renderItem={renderUserLiveStock}
+            renderItem={({ item }) => (
+              <CommonDetailsCard
+                item={item}
+                onEditPress={handleEdit}
+                onDeletePress={onDeletePress}
+                imageUrl={item?.imageUrl}
+                itemName={item.name}
+                renderDetails={renderLiveStockDetails}
+                editModalVisible={editModal}
+                setEditModalVisible={setEditModal}
+                setSentItem={setSentItem}
+                type="livestock"
+              />
+            )}
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.5}
           />

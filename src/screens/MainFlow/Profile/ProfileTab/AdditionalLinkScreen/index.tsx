@@ -22,13 +22,12 @@ import { colors } from '../../../../../themes/colors';
 import CommonText from '../../../../../components/CommonText';
 import { Images } from '../../../../../assets/images/index';
 import {
-  BackButton,
   ContactUsBanner,
   DownBlack,
   UpBlack,
 } from '../../../../../assets/icons/index';
 import { moderateScale } from '../../../../../utils/responsive';
-import { GradientBackground } from '../../../../../components';
+import { CommonBackButton, GradientBackground } from '../../../../../components';
 
 // Enable layout animation for Android
 if (
@@ -165,13 +164,10 @@ const AdditionalLinks = () => {
     <ScreenWrapper bgColor={colors.transparent}>
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>{title}</CommonText>
         </View>
       </GradientBackground>

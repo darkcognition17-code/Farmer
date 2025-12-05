@@ -12,7 +12,6 @@ import CommonButton from '../../../../components/CommonButton';
 import { Images } from '../../../../assets/images';
 import LinearGradient from 'react-native-linear-gradient';
 import {
-  BackButton,
   EyeClosed,
   EyeOpen,
   Lock,
@@ -36,7 +35,7 @@ import {
   forgotResetPassword,
   registerUserName,
 } from '../../../../redux/slices/authSlice';
-import { CommonLoader, ScreenWrapper } from '../../../../components';
+import { CommonBackButton, CommonLoader, ScreenWrapper } from '../../../../components';
 import { showToastable } from 'react-native-toastable';
 import FastImage from 'react-native-fast-image';
 
@@ -234,7 +233,7 @@ const CreatePasswordScreen = () => {
         colors={[colors.white, colors.black + '00']}
       >
         <View style={styles.backgroundGradient}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
             style={
               params?.from !== 'forgot-password'
@@ -247,13 +246,10 @@ const CreatePasswordScreen = () => {
                   ]
                 : styles.backButton
             }
-          >
-            <BackButton
-              width={scale(15)}
-              height={scale(15)}
-              style={styles.backButtonComponentStyle}
-            />
-          </TouchableOpacity>
+            width={moderateScale(10)}
+            height={moderateScale(15)}
+            iconStyle={styles.backButtonComponentStyle}
+          />
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.scrollContainer}

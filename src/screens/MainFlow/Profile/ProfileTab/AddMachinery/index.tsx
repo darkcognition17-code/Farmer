@@ -9,12 +9,12 @@ import {
   CommonButton,
   CommonLoader,
   CommonText,
+  CommonBackButton,
   GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
 import {
-  BackButton,
   Minus,
   MinusWithRed,
   Plus,
@@ -155,6 +155,14 @@ const AddMachinaryScreen = () => {
     }
   }, [addSuccess, addError, dispatch, navigation]);
 
+  if (errorTypes) {
+    return (
+      <ScreenWrapper bgColor={colors.transparent}>
+        <CommonText style={styles.errorText}>{errorTypes}</CommonText>
+      </ScreenWrapper>
+    );
+  }
+
   useEffect(() => {
     if (updateSuccess) {
       showToastable({
@@ -187,68 +195,6 @@ const AddMachinaryScreen = () => {
       );
     }
   };
-
-  const handleAddOtherDetail = () => {
-    setOtherDetails([...otherDetails, '']);
-  };
-
-  const handleOtherDetailChange = (text: string, index: number) => {
-    const newOtherDetails = [...otherDetails];
-    newOtherDetails[index] = text;
-    setOtherDetails(newOtherDetails);
-  };
-
-  const handleRemoveOtherDetail = (index: number) => {
-    const newOtherDetails = [...otherDetails];
-    newOtherDetails.splice(index, 1);
-    setOtherDetails(newOtherDetails);
-  };
-
-  const handleSave = () => {
-    //console.log('machineryStock------- ', machineryStock);
-    navigation.navigate(screenNames.AddMachineryDetails, {
-      machineryList: machineryStock,
-    });
-
-    // if (isEditMode && editableItem) {
-    //   const payload: any = {
-    //     livestockRecordId: editableItem.id,
-    //     cowDungAvailable: cowDungAvailability,
-    //     notes: editableItem.notes,
-    //   };
-
-    //   if (editableItem.name === 'Others') {
-    //     payload.livestockId = othersId;
-    //     payload.notes = otherDetails[0] || '';
-    //   } else {
-    //     payload.livestockId = editableItem.livestockTypeId;
-    //     payload.count = editableItem.count;
-    //   }
-    //   dispatch(updateLivestock(payload));
-    // } else {
-    //   const liveStockData = machineryStock
-    //     .filter(item => item.id !== othersId && item.quantity > 0)
-    //     .map(item => ({
-    //       machineryStockId: item.id,
-    //       count: item.quantity,
-    //     }));
-
-    //   const othersData = otherDetails
-    //     .filter(note => note.trim() !== '')
-    //     .map(note => ({
-    //       livestockId: othersId,
-    //       notes: note,
-    //     }));
-
-    //   const payload = {
-    //     cowDungAvailable: cowDungAvailability,
-    //     liveStockData: [...liveStockData, ...othersData],
-    //   };
-
-    //   dispatch(addLivestock(payload));
-    // }
-  };
-
   if (loadingTypes) {
     return (
       <ScreenWrapper bgColor={colors.transparent}>
@@ -257,78 +203,23 @@ const AddMachinaryScreen = () => {
     );
   }
 
-  if (errorTypes) {
-    return (
-      <ScreenWrapper bgColor={colors.transparent}>
-        <CommonText style={styles.errorText}>{errorTypes}</CommonText>
-      </ScreenWrapper>
-    );
-  }
+  const handleSave = () => {
+    navigation.navigate(screenNames.AddMachineryDetails, {
+      machineryList: machineryStock,
+    });
+  };
 
   const currentLoading = isEditMode ? updateLoading : addLoading;
-  const currentError = isEditMode ? updateError : addError;
-
-  const renderMachinery = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <View style={styles.itemLeftContainer}>
-        {item?.imageUrl && (
-          <View style={styles.itemIconContainer}>
-            <SvgUri
-              width={moderateScale(24)}
-              height={moderateScale(24)}
-              uri={IMAGE_BASE_URL + item?.imageUrl}
-            />
-          </View>
-        )}
-        <CommonText style={styles.itemName}>{item.name}</CommonText>
-      </View>
-      <View style={styles.itemRightContainer}>
-        <TouchableOpacity
-          onPress={() => handleQuantityChange(item.id, -1)}
-          disabled={item.quantity === 0}
-          style={styles.quantityButton}
-          activeOpacity={0.8}
-        >
-          {item.quantity === 0 ? (
-            <Minus height={moderateScale(28)} width={moderateScale(28)} />
-          ) : (
-            <MinusWithRed
-              height={moderateScale(28)}
-              width={moderateScale(28)}
-            />
-          )}
-        </TouchableOpacity>
-        <CommonText style={styles.quantityText}>{item.quantity}</CommonText>
-        <TouchableOpacity
-          onPress={() => handleQuantityChange(item.id, 1)}
-          style={styles.quantityButton}
-          activeOpacity={0.8}
-        >
-          {item.quantity === 0 ? (
-            <Plus height={moderateScale(28)} width={moderateScale(28)} />
-          ) : (
-            <PlusWithGreen
-              height={moderateScale(28)}
-              width={moderateScale(28)}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
 
   return (
     <ScreenWrapper bgColor={colors.transparent}>
       {currentLoading && <CommonLoader visible={currentLoading} />}
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {isEditMode
               ? t('machineryDetails.addMachineryDetails')

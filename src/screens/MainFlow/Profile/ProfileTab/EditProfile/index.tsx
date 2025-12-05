@@ -11,6 +11,7 @@ import {
   CommonText,
   ScreenWrapper,
   CommonLoader, // Import CommonLoader
+  CommonBackButton,
   GradientBackground,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
@@ -20,7 +21,6 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { useTranslation } from 'react-i18next';
 import { showToastable } from 'react-native-toastable';
 import {
-  BackButton,
   Calender,
   CalenderBlack,
   DobGray,
@@ -215,13 +215,10 @@ const EditProfileScreen = () => {
         imageStyle={styles.imageBackgroundStyle}
       >
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('editProfile.headerTitle')}
           </CommonText>

@@ -16,7 +16,6 @@ import {
 import ProfileMenuItem from '../../../../../components/ProfileMenuItem';
 import { screenNames } from '../../../../../navigation/screenNames';
 import {
-  BackButton,
   CallGray,
   DobGray,
   DustbinEmpty,

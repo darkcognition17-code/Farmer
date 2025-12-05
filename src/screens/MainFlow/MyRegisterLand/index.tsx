@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {
+  CommonBackButton,
   CommonText,
   GradientBackground,
   ScreenWrapper,
@@ -24,7 +25,6 @@ import {
 import { Images } from '../../../assets/images';
 import {
   BackArrow,
-  BackButton,
   CropLeaf,
   NoCropLeaf,
   NotificationBell,
@@ -138,16 +138,10 @@ const MyRegisterLand = () => {
         <GradientBackground imageStyle={styles.headerImageStyle}>
           <View style={styles.headerContent}>
             <View style={styles.headerContentSub}>
-              <TouchableOpacity
+              <CommonBackButton
                 onPress={() => navigation.goBack()}
-                activeOpacity={0.8}
                 style={styles.bell}
-              >
-                <BackButton
-                  width={moderateScale(10)}
-                  height={moderateScale(15)}
-                />
-              </TouchableOpacity>
+              />
               <CommonText style={styles.name}>
                 {t('myRegisterLand.myRegisteredLands')}
               </CommonText>

@@ -8,6 +8,7 @@ import {
   CommonBottomSelectModal,
   CommonLoader,
   GradientBackground,
+  CommonBackButton,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
@@ -15,7 +16,6 @@ import { Images } from '../../../../../assets/images';
 import { useTranslation } from 'react-i18next';
 import { showToastable } from 'react-native-toastable';
 import {
-  BackButton,
   NameGray,
   MailGray,
   CallGray,
@@ -144,13 +144,10 @@ const EditAdditionalDetails = () => {
         imageStyle={styles.imageBackgroundStyle}
       >
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('editAdditionalDetails.headerTitle')}
           </CommonText>
@@ -221,40 +218,40 @@ const EditAdditionalDetails = () => {
           {t('profileSetup.alternateMobileNumber')}
         </CommonText>
         <CommonInput
-          containerStyle={styles.inputContainer}
-          style={styles.inputField}
-          placeholder={t('mobileRegister.mobileNumberPlaceholder')}
-          value={alternateMobile}
-          onChangeText={setAlternateMobile}
-          keyboardType="phone-pad"
-          leftIcon={
-            <CallGray
-              height={moderateScale(24)}
-              width={moderateScale(24)}
-              style={styles.userOrangeIcon}
-            />
-          }
-        />
+            containerStyle={styles.inputContainer}
+            style={styles.inputField}
+            placeholder={t('mobileRegister.mobileNumberPlaceholder')}
+            value={alternateMobile}
+            onChangeText={setAlternateMobile}
+            keyboardType="phone-pad"
+            leftIcon={
+              <CallGray
+                height={moderateScale(24)}
+                width={moderateScale(24)}
+                style={styles.userOrangeIcon}
+              />
+            }
+          />
 
         {/* Email */}
         <CommonText style={styles.label}>
           {t('profileSetup.emailId')}
         </CommonText>
         <CommonInput
-          containerStyle={styles.inputContainer}
-          style={styles.inputField}
-          placeholder={t('profileSetup.enterEmailId')}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          leftIcon={
-            <MailGray
-              height={moderateScale(24)}
-              width={moderateScale(24)}
-              style={styles.userOrangeIcon}
-            />
-          }
-        />
+            containerStyle={styles.inputContainer}
+            style={styles.inputField}
+            placeholder={t('profileSetup.enterEmailId')}
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            leftIcon={
+              <MailGray
+                height={moderateScale(24)}
+                width={moderateScale(24)}
+                style={styles.userOrangeIcon}
+              />
+            }
+          />
 
         {/* Highest Education */}
         <CommonText style={styles.label}>
@@ -292,5 +289,4 @@ const EditAdditionalDetails = () => {
     </ScreenWrapper>
   );
 };
-
 export default EditAdditionalDetails;

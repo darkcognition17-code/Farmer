@@ -12,15 +12,14 @@ import {
   CommonButton,
   CommonText,
   GradientBackground,
-  ImagePickerModal,
   ScreenWrapper,
+  CommonBackButton,
+  CommonDetailsCard,
 } from '../../../../../components';
 import { moderateScale, scaledFontSize } from '../../../../../utils/responsive';
 import {
-  BackButton,
   DustbinModal,
   EditModalPencil,
-  EditPencilIcon,
   Livestock,
   Machinery,
   User,
@@ -37,7 +36,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMachinery } from '../../../../../redux/slices/machinarySlice';
 
 import { AppDispatch, RootState } from '../../../../../redux/store';
-import { SvgUri } from 'react-native-svg';
 import { IMAGE_BASE_URL } from '../../../../../utils/helperFunction';
 import { fonts } from '../../../../../themes/fonts';
 import ColoredSvg from '../../../../../components/ColoredSvg';
@@ -93,11 +91,11 @@ const MachineryDetails = () => {
     navigation.navigate(screenNames.AddMachineryScreen);
   };
 
-  const handleDeleteMachinery = async () => {
+  const handleDeleteMachinery = async (item: any) => { // Modified to accept item
     setEditModal(false);
     try {
-      if (sentItem && sentItem.id) {
-        let response = await authService.deleteMachinery(sentItem.id);
+      if (item && item.id) {
+        let response = await authService.deleteMachinery(item.id);
         //console.log('response---------------->. ', response);
 
         showToastable({
@@ -253,80 +251,50 @@ const MachineryDetails = () => {
     );
   };
 
-  const handleEdit = () => {
+  const handleEdit = (item: any) => { // Modified to accept item
     navigation.navigate(screenNames.EditMachinery, {
-      item: sentItem,
+      item: item,
     });
     setEditModal(false);
   };
 
-  const renderList = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <TouchableOpacity
-        onPress={() => {
-          setEditModal(true);
-          setSentItem(item);
-        }}
-        activeOpacity={0.8}
-        style={styles.editButton}
-      >
-        <EditPencilIcon height={moderateScale(16)} width={moderateScale(16)} />
-      </TouchableOpacity>
-      <ImagePickerModal
-        visible={editModal}
-        cancelable={false}
-        title1={t('liveStockDetails.editDetails')}
-        Icon1={
-          <EditModalPencil
-            width={moderateScale(24)}
-            height={moderateScale(24)}
-          />
-        }
-        onCameraPress={handleEdit}
-        title2={t('liveStockDetails.delete')}
-        Icon2={
-          <DustbinModal width={moderateScale(24)} height={moderateScale(24)} />
-        }
-        onGalleryPress={handleDeleteMachinery}
-        onClose={() => setEditModal(false)}
-      />
-      <View style={styles.itemHeader}>
-        <ColoredSvg
-          uri={IMAGE_BASE_URL + item?.imageUrl}
-          color={colors.CropCountGreen}
-          size={moderateScale(24)}
-        />
+  const renderMachineryList = ({ item }) => {
+    const machineryNameDisplay =
+      item.name.toLowerCase() === 'tractor' ? (
+        <>
+          {`${item.brand} ${item.name} `}
+          <CommonText style={styles.modelTitle}>
+            {`(${item.yearOfManufacture}${t('machineryDetails.modelText')}`}{' '}
+          </CommonText>
+        </>
+      ) : (
+        item.name
+      );
 
-        <CommonText style={styles.itemName}>
-          {item.name.toLowerCase() === 'tractor' ? (
-            <>
-              {`${item.brand} ${item.name} `}
-              <CommonText style={styles.modelTitle}>
-                {`(${item.yearOfManufacture}${t('machineryDetails.modelText')}`}
-              </CommonText>
-            </>
-          ) : (
-            item.name
-          )}
-        </CommonText>
-      </View>
-      <View style={styles.itemDetailsContainer}>
-        {renderMachineryItemDetails(item)}
-      </View>
-    </View>
-  );
+    return (
+      <CommonDetailsCard
+        item={item}
+        onEditPress={handleEdit}
+        onDeletePress={handleDeleteMachinery}
+        imageUrl={item?.imageUrl}
+        itemName={machineryNameDisplay}
+        renderDetails={renderMachineryItemDetails}
+        editModalVisible={editModal}
+        setEditModalVisible={setEditModal}
+        setSentItem={setSentItem}
+        type="machinery"
+      />
+    );
+  };
 
   return (
     <View style={styles.main}>
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('profileScreen.machineryDetails')}
           </CommonText>
@@ -346,7 +314,7 @@ const MachineryDetails = () => {
             refreshControl={
               <RefreshControl refreshing={loading} onRefresh={onRefresh} />
             }
-            renderItem={renderList}
+            renderItem={renderMachineryList}
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}

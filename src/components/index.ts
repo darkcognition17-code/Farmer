@@ -8,3 +8,5 @@ export { default as CommonBottomSelectModal } from './CommonBottomSelectModal';
 export { default as ProfileCompletionCard } from './ProfileCompletionCard';
 export { default as ProfileInfoCard } from './ProfileInfoCard';
 export { default as GradientBackground } from './GradientBackground';
+export { default as CommonBackButton } from './CommonBackButton';
+export { default as CommonDetailsCard } from './CommonDetailsCard';

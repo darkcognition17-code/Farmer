@@ -6,12 +6,17 @@ import CommonOtpInput from '../../../../components/CommonOtpInput';
 import { screenNames } from '../../../../navigation/screenNames';
 import { colors } from '../../../../themes/colors';
 import {
+  CommonBackButton,
   CommonInput,
   CommonLoader,
   ScreenWrapper,
 } from '../../../../components';
-import { BackButton, Clock } from '../../../../assets/icons';
-import { scale, verticalScale } from '../../../../utils/responsive';
+import { Clock } from '../../../../assets/icons';
+import {
+  moderateScale,
+  scale,
+  verticalScale,
+} from '../../../../utils/responsive';
 import { styles } from './style';
 import { CommonButton, CommonText } from '../../../../components';
 import { useTranslation } from 'react-i18next';
@@ -263,16 +268,13 @@ const MobileOtp = () => {
         colors={[colors.white, colors.black + '00']}
       >
         <View style={styles.backgroundGradient}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
             style={styles.backButton}
-          >
-            <BackButton
-              width={scale(15)}
-              height={scale(15)}
-              style={styles.backButtonComponent}
-            />
-          </TouchableOpacity>
+            width={moderateScale(15)}
+            height={moderateScale(15)}
+            iconStyle={styles.backButtonComponent}
+          />
 
           <View style={styles.container}>
             {from !== 'forgotpassword' && (

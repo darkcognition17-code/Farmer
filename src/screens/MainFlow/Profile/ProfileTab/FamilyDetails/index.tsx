@@ -14,9 +14,10 @@ import {
   ScreenWrapper,
   CommonLoader,
   GradientBackground,
+  CommonBackButton,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
-import { BackButton, UserUnfilledGray } from '../../../../../assets/icons';
+import { UserUnfilledGray } from '../../../../../assets/icons';
 import { Images } from '../../../../../assets/images';
 import { styles } from './style';
 import { useTranslation } from 'react-i18next';
@@ -108,13 +109,10 @@ const FamilyDetails = () => {
     >
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('familyMemberDetails.headerTitle')}
           </CommonText>

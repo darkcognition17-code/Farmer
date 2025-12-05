@@ -16,9 +16,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './style';
 import { Images } from '../../../../../assets/images';
-import { ToggleOn, ToggleOff, BackButton } from '../../../../../assets/icons';
+import { ToggleOn, ToggleOff } from '../../../../../assets/icons';
 import { colors } from '../../../../../themes/colors';
 import {
+  CommonBackButton,
   CommonButton,
   CommonText,
   GradientBackground,
@@ -52,13 +53,10 @@ const ChangeLanguageScreen = () => {
       {/* Pass currentLang so it pre-selects the user's active choice */}
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('profileScreen.changeLanguageTitle')}
           </CommonText>

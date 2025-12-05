@@ -9,13 +9,13 @@ import {
   CommonButton,
   ScreenWrapper,
   CommonBottomSelectModal,
+  CommonBackButton,
   GradientBackground,
 } from '../../../../../components';
 import MachineryFormCard from '../../../../../components/MachineryFormCard'; // Import the new component
 import { useMachineryForm } from '../../../../../hooks/useMachineryForm'; // Import the new hook
 import { colors } from '../../../../../themes/colors';
 import { moderateScale } from '../../../../../utils/responsive';
-import { BackButton } from '../../../../../assets/icons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AppStackParamList } from '../../../../../navigation/appNavigator';
 import { useNavigation } from '@react-navigation/native';
@@ -200,13 +200,10 @@ const AddMachineryDetails = ({ route }: any) => {
     <ScreenWrapper bgColor={colors.transparent} scrollable>
       <GradientBackground style={styles.progressHeader}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity
+          <CommonBackButton
             onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
             style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          />
           <CommonText style={styles.headerTitle}>
             {t('machineryDetails.headerTitle')}
           </CommonText>

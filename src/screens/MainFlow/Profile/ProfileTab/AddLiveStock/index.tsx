@@ -325,7 +325,6 @@ const AddLiveStock = () => {
   }
 
   const currentLoading = isEditMode ? updateLoading : addLoading;
-  const currentError = isEditMode ? updateError : addError;
 
   return (
     <ScreenWrapper bgColor={colors.transparent}>
