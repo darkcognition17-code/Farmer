@@ -16,7 +16,7 @@ import {
   GradientBackground,
   ScreenWrapper,
 } from '../../../../../components';
-import { BackButton, Clock } from '../../../../../assets/icons';
+import { Clock } from '../../../../../assets/icons';
 import {
   moderateScale,
   scale,
@@ -135,15 +135,14 @@ const DeleteAccountOTP = () => {
       style={styles.screenWrapperContainer}
     >
       <CommonLoader visible={isLoading} />
-      <GradientBackground imageStyle={styles.imageBackgroundStyle}>
+      <GradientBackground
+        imageStyle={styles.imageBackgroundStyle}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
-            style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
+          <CommonText style={styles.headerTitle}>{'Verify Your Identity'}</CommonText>
         </View>
       </GradientBackground>
 

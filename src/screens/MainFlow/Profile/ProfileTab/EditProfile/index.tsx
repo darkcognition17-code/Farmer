@@ -11,7 +11,6 @@ import {
   CommonText,
   ScreenWrapper,
   CommonLoader, // Import CommonLoader
-  CommonBackButton,
   GradientBackground,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
@@ -213,12 +212,11 @@ const EditProfileScreen = () => {
       <GradientBackground
         style={styles.progressHeader}
         imageStyle={styles.imageBackgroundStyle}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
       >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>
             {t('editProfile.headerTitle')}
           </CommonText>

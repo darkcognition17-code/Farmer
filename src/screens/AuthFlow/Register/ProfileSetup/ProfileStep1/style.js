@@ -41,15 +41,6 @@ export const styles = StyleSheet.create({
     borderRadius: moderateScale(8),
     backgroundColor: colors.error,
   },
-  kisaniName: {
-    fontWeight: '600',
-    fontSize: moderateScale(14),
-  },
-  docItem: {
-    paddingVertical: moderateScale(10),
-    borderBottomWidth: 1,
-    borderBottomColor: colors.Neutrals700,
-  },
   progressHeader: {
     paddingBottom: moderateScale(20),
     justifyContent: 'center',
@@ -60,30 +51,6 @@ export const styles = StyleSheet.create({
   progressContent: {
     width: '92%',
     alignSelf: 'center',
-  },
-  progressText: {
-    fontSize: scaledFontSize(20),
-    color: colors.Neutrals100,
-  },
-  progressPercent: {
-    fontSize: scaledFontSize(18),
-    fontWeight: 'bold',
-  },
-  progressStepsText: {
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals300,
-  },
-  addDetailsText: {
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals300,
-    marginTop: 5,
-    marginBottom: 8,
-  },
-  progressBarBackground: {
-    height: 5, // Thinner bar
-    backgroundColor: colors.ButtonDisableColor,
-    borderRadius: 2.5,
-    overflow: 'hidden',
   },
 
   // --- General Content Styles ---
@@ -97,13 +64,6 @@ export const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     color: colors.Neutrals100,
     fontWeight: '500',
-  },
-  subHeader: {
-    marginTop: 20,
-    marginBottom: 10,
-    fontSize: moderateScale(14),
-    fontWeight: '600',
-    color: colors.DarkGray,
   },
   boldText: {
     fontWeight: '600',
@@ -127,23 +87,8 @@ export const styles = StyleSheet.create({
     color: colors.Neutrals100,
     fontWeight: '500',
   },
-  inputStyle: {
-    height: 50,
-    borderRadius: 8,
-    borderColor: colors.ButtonDisableColor,
-    borderWidth: 1,
-    backgroundColor: colors.white,
-  },
   // --- Dropdown Styles ---
 
-  dropdownText: {
-    fontSize: 16,
-    color: colors.DarkGray,
-  },
-
-  documentDropdown: {
-    marginBottom: 15,
-  },
   verificationHint: {
     marginBottom: 15,
     fontFamily: fonts.regular,
@@ -159,20 +104,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
   },
-  fileUploadTitleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 5,
-    marginBottom: 5,
-  },
-
-  fileUploadText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.MediumGray,
-    textAlign: 'center',
-  },
 
   // --- Gender Selector Styles ---
   genderContainer: {
@@ -180,20 +111,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  genderFemaleOption: {
-    justifyContent: 'space-between', // Default alignment
-  },
-
-  genderText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: colors.DarkGray,
-  },
-  genderImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
   // --- Button Styles ---
   buttonWrapper: {
     // paddingHorizontal: 20,
@@ -218,12 +135,6 @@ export const styles = StyleSheet.create({
   userName: {
     // gap: moderateScale(2),
     flexDirection: 'row',
-  },
-  flagIcon: {
-    // height: verticalScale(12),
-    // width: scale(12),
-    resizeMode: 'contain',
-    alignSelf: 'center',
   },
   uploadedImage: {
     width: scale(168),

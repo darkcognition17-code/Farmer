@@ -14,7 +14,6 @@ import { styles } from './style'; // Similar wrapper styles
 import { updateLandDetails } from '../../../../redux/slices/authSlice';
 import { showToastable } from 'react-native-toastable';
 import { RootState } from '../../../../redux/store';
-import { BackButton } from '../../../../assets/icons';
 import { moderateScale } from '../../../../utils/responsive';
 import { useTranslation } from 'react-i18next';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -102,15 +101,13 @@ const EditLandScreen = () => {
       <CommonLoader visible={loading} />
 
       {/* Standard Header (Simpler than Onboarding) */}
-      <GradientBackground style={styles.progressHeader}>
+      <GradientBackground
+        style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
-            style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
           <CommonText style={styles.headerTitle}>
             {t('addNewLand.editLand')}
           </CommonText>

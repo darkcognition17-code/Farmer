@@ -113,6 +113,7 @@ const MachineryFormCard: React.FC<MachineryFormCardProps> = ({
     label: string,
     icon: any = Calender,
   ) => {
+    console.log('item', item);
     // Handle display value
     let displayValue = t('machineryDetails.yearPlaceholder');
     const dateVal =
@@ -176,7 +177,7 @@ const MachineryFormCard: React.FC<MachineryFormCardProps> = ({
           label={t('machineryDetails.hpLabel')}
           placeholder={t('machineryDetails.hpPlaceholder')}
           style={styles.input}
-          maxLength={4}
+          maxLength={3}
           allowedCharsRegex={MOBILE_REGEX}
           value={item.horsepower ? item.horsepower.toString() : ''}
           onChangeText={text => onChange('horsepower', text)}
@@ -295,7 +296,7 @@ const MachineryFormCard: React.FC<MachineryFormCardProps> = ({
         style={styles.input}
         label={t('machineryDetails.sizeLabel')}
         placeholder={t('addMachineryDetails.sizePlaceholder')}
-        maxLength={5}
+        maxLength={4}
         allowedCharsRegex={MOBILE_REGEX}
         leftIcon={<Cart height={moderateScale(24)} width={moderateScale(24)} />}
         value={item.size ? item.size.toString() : ''}

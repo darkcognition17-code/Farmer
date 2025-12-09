@@ -140,20 +140,20 @@ const AddMachinaryScreen = () => {
     }
   }, [route.params?.item]);
 
-  useEffect(() => {
-    if (addSuccess) {
-      showToastable({
-        message: t('addMachinery.addSuccess'),
-        status: 'success',
-      });
-      dispatch(resetAddLivestockState());
-      navigation.goBack();
-    }
-    if (addError) {
-      showToastable({ message: addError, status: 'danger' });
-      dispatch(resetAddLivestockState());
-    }
-  }, [addSuccess, addError, dispatch, navigation]);
+  // useEffect(() => {
+  //   if (addSuccess) {
+  //     showToastable({
+  //       message: t('addMachinery.addSuccess'),
+  //       status: 'success',
+  //     });
+  //     dispatch(resetAddLivestockState());
+  //     navigation.goBack();
+  //   }
+  //   if (addError) {
+  //     showToastable({ message: addError, status: 'danger' });
+  //     dispatch(resetAddLivestockState());
+  //   }
+  // }, [addSuccess, addError, dispatch, navigation]);
 
   if (errorTypes) {
     return (
@@ -163,20 +163,20 @@ const AddMachinaryScreen = () => {
     );
   }
 
-  useEffect(() => {
-    if (updateSuccess) {
-      showToastable({
-        message: t('addMachinery.updateSuccess'),
-        status: 'success',
-      });
-      dispatch(resetUpdateLivestockState());
-      navigation.goBack();
-    }
-    if (updateError) {
-      showToastable({ message: updateError, status: 'danger' });
-      dispatch(resetUpdateLivestockState());
-    }
-  }, [updateSuccess, updateError, dispatch, navigation]);
+  // useEffect(() => {
+  //   if (updateSuccess) {
+  //     showToastable({
+  //       message: t('addMachinery.updateSuccess'),
+  //       status: 'success',
+  //     });
+  //     dispatch(resetUpdateLivestockState());
+  //     navigation.goBack();
+  //   }
+  //   if (updateError) {
+  //     showToastable({ message: updateError, status: 'danger' });
+  //     dispatch(resetUpdateLivestockState());
+  //   }
+  // }, [updateSuccess, updateError, dispatch, navigation]);
 
   const handleQuantityChange = (id: string, change: number) => {
     if (isEditMode && editableItem) {

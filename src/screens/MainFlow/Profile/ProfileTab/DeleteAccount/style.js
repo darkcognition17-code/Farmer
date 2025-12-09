@@ -45,20 +45,6 @@ export const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
 
-  contentContainer: {
-    backgroundColor: colors.white,
-    marginHorizontal: moderateScale(16),
-    padding: moderateScale(20),
-    borderRadius: moderateScale(24),
-    gap: verticalScale(12),
-  },
-  containerTitle: {
-    fontSize: scaledFontSize(24),
-    color: colors.Neutrals010,
-    fontWeight: '600',
-    fontFamily: fonts.semiBold,
-    textAlign: 'left',
-  },
   scrollContainer: {
     padding: 20,
     flexGrow: 1,
@@ -68,16 +54,6 @@ export const styles = StyleSheet.create({
     borderRadius: 24,
     justifyContent: 'space-between',
     marginBottom: 20,
-  },
-
-  card: {
-    backgroundColor: colors.white,
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: colors.black,
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 2,
   },
 
   title: {
@@ -99,70 +75,5 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.Neutrals300,
     lineHeight: 20,
-  },
-
-  deleteButton: {
-    backgroundColor: colors.ButtonColor,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    borderRadius: 14,
-    paddingVertical: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  deleteText: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  profileSection: {
-    alignItems: 'center',
-    marginTop: moderateScale(25),
-    marginBottom: moderateScale(25),
-  },
-  profileImage: {
-    width: moderateScale(96),
-    height: moderateScale(96),
-    borderRadius: moderateScale(12),
-  },
-  cameraIcon: {
-    position: 'absolute',
-    bottom: moderateScale(-10),
-    right: moderateScale(100),
-    backgroundColor: colors.Secondary,
-    borderColor: colors.white,
-    borderWidth: moderateScale(1),
-    borderRadius: moderateScale(20),
-    padding: moderateScale(6),
-  },
-  userOrangeIcon: {
-    marginLeft: moderateScale(5),
-  },
-  label: {
-    marginBottom: moderateScale(8),
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals100,
-  },
-  inputField: {
-    paddingVertical: moderateScale(17),
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(16),
-    color: colors.Neutrals010,
-  },
-  mobileInputField: {
-    paddingVertical: moderateScale(17),
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(16),
-    color: colors.Neutrals010,
-    paddingLeft: moderateScale(94),
-  },
-  indianFlagIcon: {
-    marginLeft: moderateScale(5),
-  },
-  buttonWrapper: {
-    marginTop: moderateScale(30),
-  },
-  saveButton: {
-    paddingVertical: moderateScale(17),
   },
 });

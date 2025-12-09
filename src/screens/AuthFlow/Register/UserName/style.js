@@ -19,16 +19,6 @@ export const styles = StyleSheet.create({
 
   video: { ...StyleSheet.absoluteFillObject },
 
-  backButton: {
-    backgroundColor: colors.white,
-    borderRadius: scale(8),
-    padding: moderateScale(10),
-    alignSelf: 'flex-start',
-    marginLeft: scale(18),
-    position: 'absolute',
-    top: verticalScale(63),
-  },
-
   container: {
     width: '92%',
     paddingHorizontal: moderateScale(20),
@@ -45,20 +35,13 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  inputLabel: {
-    marginTop: verticalScale(20),
-  },
-
   inputContainer: {
     paddingLeft: scale(40),
     paddingVertical: verticalScale(16),
     fontSize: scaledFontSize(16),
     marginBottom: verticalScale(5),
   },
-  passwordInputContainer: {
-    paddingVertical: verticalScale(16),
-    fontSize: scaledFontSize(16),
-  },
+
   flagAndCode: {
     gap: moderateScale(8),
     flexDirection: 'row',
@@ -69,12 +52,6 @@ export const styles = StyleSheet.create({
     width: scale(24),
     resizeMode: 'contain',
     alignSelf: 'center',
-  },
-  countryCode: {
-    fontSize: scaledFontSize(16),
-    fontWeight: '400',
-    color: colors.Neutrals500,
-    fontFamily: fonts.regular,
   },
 
   continueButton: {
@@ -107,13 +84,13 @@ export const styles = StyleSheet.create({
     padding: moderateScale(8),
     maxWidth: scale(220),
   },
-  infoIconContainer:{
+  infoIconContainer: {
     width: scale(32),
     height: scale(32),
     alignItems: 'center',
     justifyContent: 'center',
   },
-  infoIcon:{
-     resizeMode: 'contain' 
-  }
+  infoIcon: {
+    resizeMode: 'contain',
+  },
 });

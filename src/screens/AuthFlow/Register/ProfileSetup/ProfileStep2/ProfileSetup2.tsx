@@ -383,6 +383,9 @@ const ProfileSetupStep2 = ({ navigation }: any) => {
       <GradientBackground
         imageStyle={styles.imageBackground}
         style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
       >
         <CommonText style={styles.headerTitle}>
           {t('contactDetailScreen.header')}

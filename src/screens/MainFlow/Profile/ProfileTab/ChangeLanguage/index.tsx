@@ -19,7 +19,6 @@ import { Images } from '../../../../../assets/images';
 import { ToggleOn, ToggleOff } from '../../../../../assets/icons';
 import { colors } from '../../../../../themes/colors';
 import {
-  CommonBackButton,
   CommonButton,
   CommonText,
   GradientBackground,
@@ -51,12 +50,13 @@ const ChangeLanguageScreen = () => {
   return (
     <ScreenWrapper bgColor={colors.white}>
       {/* Pass currentLang so it pre-selects the user's active choice */}
-      <GradientBackground style={styles.progressHeader}>
+      <GradientBackground
+        style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>
             {t('profileScreen.changeLanguageTitle')}
           </CommonText>

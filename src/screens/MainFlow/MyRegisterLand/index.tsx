@@ -10,7 +10,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {
-  CommonBackButton,
   CommonText,
   GradientBackground,
   ScreenWrapper,
@@ -135,13 +134,14 @@ const MyRegisterLand = () => {
   return (
     <>
       <ScreenWrapper bgColor={colors.transparent}>
-        <GradientBackground imageStyle={styles.headerImageStyle}>
+        <GradientBackground
+          imageStyle={styles.headerImageStyle}
+          showBackButton={true}
+          onBackPress={() => navigation.goBack()}
+          backButtonStyles={styles.bell}
+        >
           <View style={styles.headerContent}>
             <View style={styles.headerContentSub}>
-              <CommonBackButton
-                onPress={() => navigation.goBack()}
-                style={styles.bell}
-              />
               <CommonText style={styles.name}>
                 {t('myRegisterLand.myRegisteredLands')}
               </CommonText>

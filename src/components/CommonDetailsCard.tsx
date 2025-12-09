@@ -7,7 +7,7 @@ import {
   ViewStyle,
   ImageStyle,
 } from 'react-native';
-import { moderateScale } from '../utils/responsive';
+import { moderateScale, verticalScale } from '../utils/responsive';
 import { colors } from '../themes/colors';
 import { EditPencilIcon, DustbinModal, EditModalPencil } from '../assets/icons';
 import { SvgUri } from 'react-native-svg';
@@ -15,6 +15,7 @@ import { IMAGE_BASE_URL } from '../utils/helperFunction';
 import CommonText from './CommonText';
 import ImagePickerModal from './ImagePikerModal';
 import { useTranslation } from 'react-i18next';
+import ColoredSvg from './ColoredSvg';
 
 interface CommonDetailsCardProps {
   item: any;
@@ -58,7 +59,7 @@ const CommonDetailsCard: React.FC<CommonDetailsCardProps> = ({
       <ImagePickerModal
         visible={editModalVisible}
         cancelable={false}
-        title1={t(`${type}Details.editDetails`)}
+        title1={t(`liveStockDetails.editDetails`)}
         Icon1={
           <EditModalPencil
             width={moderateScale(24)}
@@ -66,7 +67,7 @@ const CommonDetailsCard: React.FC<CommonDetailsCardProps> = ({
           />
         }
         onCameraPress={() => onEditPress(item)}
-        title2={t(`${type}Details.delete`)}
+        title2={t(`liveStockDetails.delete`)}
         Icon2={
           <DustbinModal width={moderateScale(24)} height={moderateScale(24)} />
         }
@@ -76,14 +77,30 @@ const CommonDetailsCard: React.FC<CommonDetailsCardProps> = ({
       <View style={styles.itemHeader}>
         {imageUrl && (
           <View style={styles.itemIconContainer}>
-            <SvgUri
-              height={moderateScale(21)}
-              width={moderateScale(21)}
-              uri={IMAGE_BASE_URL + imageUrl}
+            <ColoredSvg
+              uri={IMAGE_BASE_URL + item?.imageUrl}
+              color={
+                type == 'livestock'
+                  ? colors.LiveStockName
+                  : colors.CropCountGreen
+              }
+              size={type == 'livestock' ? moderateScale(21) : moderateScale(24)}
             />
           </View>
         )}
-        <CommonText style={styles.itemName}>{itemName}</CommonText>
+        <CommonText
+          style={[
+            styles.itemName,
+            {
+              color:
+                type === 'livestock'
+                  ? colors.LiveStockName
+                  : colors.CropCountGreen,
+            },
+          ]}
+        >
+          {itemName}
+        </CommonText>
       </View>
       <View style={styles.itemDetailsContainer}>{renderDetails(item)}</View>
     </View>
@@ -106,7 +123,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: moderateScale(10),
     right: moderateScale(10),
-    zIndex: 1,
+    zIndex: 0,
+    backgroundColor: colors.ButtonColor,
+    padding: moderateScale(6),
+    borderRadius: moderateScale(25),
   },
   itemHeader: {
     flexDirection: 'row',
@@ -119,10 +139,12 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: moderateScale(16),
     fontWeight: 'bold',
-    color: colors.Neutrals010,
   },
   itemDetailsContainer: {
     marginLeft: moderateScale(4), // Align with item name
+    maxHeight: verticalScale(100),
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });
 

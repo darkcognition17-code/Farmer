@@ -60,11 +60,6 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: '600',
   },
-  instruction: {
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals500,
-    marginBottom: verticalScale(30),
-  },
   inputContainer: {
     paddingLeft: scale(Platform.OS == 'android' ? 50 : 40),
     paddingVertical: verticalScale(16),
@@ -95,11 +90,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: verticalScale(10),
-  },
-  footerText: {
-    textAlignVertical: 'center',
-    fontSize: scaledFontSize(13),
-    color: colors.Neutrals900,
   },
   signUpText: {
     fontSize: scaledFontSize(13),
@@ -133,9 +123,6 @@ export const styles = StyleSheet.create({
   forgotPassContainer: {
     flexDirection: 'row-reverse',
     right: 0,
-  },
-  orText: {
-    paddingHorizontal: scale(5),
   },
   loginButton: {
     backgroundColor: colors.ButtonColor,

@@ -61,47 +61,6 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  inputLabel: {
-    marginTop: verticalScale(20),
-  },
-
-  inputContainer: {
-    paddingLeft: scale(90),
-    paddingVertical: verticalScale(16),
-    fontSize: scaledFontSize(16),
-    marginBottom: verticalScale(5),
-  },
-  passwordInputContainer: {
-    paddingVertical: verticalScale(16),
-    fontSize: scaledFontSize(16),
-  },
-  flagAndCode: {
-    gap: moderateScale(8),
-    flexDirection: 'row',
-    borderRightColor: colors.Neutral,
-    borderRightWidth: 1,
-    paddingRight: scale(10),
-  },
-  flagIcon: {
-    height: verticalScale(17),
-    width: scale(24),
-    resizeMode: 'contain',
-    alignSelf: 'center',
-  },
-  countryCode: {
-    fontSize: scaledFontSize(16),
-    fontWeight: '400',
-    color: colors.Neutrals500,
-    fontFamily: fonts.regular,
-  },
-  resendContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: verticalScale(40),
-  },
-  resetText: {
-    textAlign: 'center',
-  },
   timer: {
     color: colors.TimerGreen,
     fontFamily: fonts.medium,
@@ -119,10 +78,6 @@ export const styles = StyleSheet.create({
     color: colors.ButtonColor,
     fontFamily: fonts.medium,
   },
-  disabledResend: {
-    color: colors.gray,
-    fontFamily: fonts.medium,
-  },
 
   continueButton: {
     backgroundColor: colors.ButtonColor,
@@ -133,11 +88,5 @@ export const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
-  },
-  timerText: {
-    color: colors.green,
-  },
-  userIdContainer: {
-    flexDirection: 'row',
   },
 });

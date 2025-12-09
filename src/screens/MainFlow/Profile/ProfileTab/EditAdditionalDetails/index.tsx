@@ -8,7 +8,6 @@ import {
   CommonBottomSelectModal,
   CommonLoader,
   GradientBackground,
-  CommonBackButton,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
@@ -82,6 +81,10 @@ const EditAdditionalDetails = () => {
     }
   }, [farmerData]);
 
+  if (loading) {
+    return <CommonLoader visible={true} />;
+  }
+
   const handleSave = () => {
     if (
       !guardianName.trim() ||
@@ -129,10 +132,6 @@ const EditAdditionalDetails = () => {
       });
   };
 
-  if (loading) {
-    return <CommonLoader visible={true} />;
-  }
-
   return (
     <ScreenWrapper
       scrollable
@@ -140,14 +139,13 @@ const EditAdditionalDetails = () => {
       style={styles.screenWrapperContainer}
     >
       <GradientBackground
+        onBackPress={() => navigation.goBack()}
         style={styles.progressHeader}
         imageStyle={styles.imageBackgroundStyle}
+        backButtonStyles={styles.bell}
+        showBackButton={true}
       >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>
             {t('editAdditionalDetails.headerTitle')}
           </CommonText>
@@ -218,40 +216,40 @@ const EditAdditionalDetails = () => {
           {t('profileSetup.alternateMobileNumber')}
         </CommonText>
         <CommonInput
-            containerStyle={styles.inputContainer}
-            style={styles.inputField}
-            placeholder={t('mobileRegister.mobileNumberPlaceholder')}
-            value={alternateMobile}
-            onChangeText={setAlternateMobile}
-            keyboardType="phone-pad"
-            leftIcon={
-              <CallGray
-                height={moderateScale(24)}
-                width={moderateScale(24)}
-                style={styles.userOrangeIcon}
-              />
-            }
-          />
+          containerStyle={styles.inputContainer}
+          style={styles.inputField}
+          placeholder={t('mobileRegister.mobileNumberPlaceholder')}
+          value={alternateMobile}
+          onChangeText={setAlternateMobile}
+          keyboardType="phone-pad"
+          leftIcon={
+            <CallGray
+              height={moderateScale(24)}
+              width={moderateScale(24)}
+              style={styles.userOrangeIcon}
+            />
+          }
+        />
 
         {/* Email */}
         <CommonText style={styles.label}>
           {t('profileSetup.emailId')}
         </CommonText>
         <CommonInput
-            containerStyle={styles.inputContainer}
-            style={styles.inputField}
-            placeholder={t('profileSetup.enterEmailId')}
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            leftIcon={
-              <MailGray
-                height={moderateScale(24)}
-                width={moderateScale(24)}
-                style={styles.userOrangeIcon}
-              />
-            }
-          />
+          containerStyle={styles.inputContainer}
+          style={styles.inputField}
+          placeholder={t('profileSetup.enterEmailId')}
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          leftIcon={
+            <MailGray
+              height={moderateScale(24)}
+              width={moderateScale(24)}
+              style={styles.userOrangeIcon}
+            />
+          }
+        />
 
         {/* Highest Education */}
         <CommonText style={styles.label}>

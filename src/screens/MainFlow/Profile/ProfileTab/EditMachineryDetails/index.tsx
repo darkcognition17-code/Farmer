@@ -5,7 +5,6 @@ import {
   CommonButton,
   ScreenWrapper,
   GradientBackground,
-  CommonBackButton,
 } from '../../../../../components';
 import MachineryFormCard from '../../../../../components/MachineryFormCard'; // Import
 import { useMachineryForm } from '../../../../../hooks/useMachineryForm'; // Import
@@ -174,13 +173,14 @@ const EditMachineryDetails = ({ route }: any) => {
   };
 
   return (
-    <ScreenWrapper bgColor={colors.transparent} scrollable>
-      <GradientBackground style={styles.progressHeader}>
+    <View style={styles.main}>
+      <GradientBackground
+        style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>
             {t('machineryDetails.headerTitle')}
           </CommonText>
@@ -211,7 +211,7 @@ const EditMachineryDetails = ({ route }: any) => {
           />
         </View>
       </View>
-    </ScreenWrapper>
+    </View>
   );
 };
 

@@ -50,7 +50,6 @@ import {
 } from '../../../redux/slices/authSlice';
 import { AppStackParamList } from '../../../navigation/appNavigator';
 import {
-  CommonBackButton,
   CommonText,
   GradientBackground,
   ProfileInfoCard,
@@ -160,12 +159,13 @@ const LandDetails = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <GradientBackground style={styles.progressHeader}>
+      <GradientBackground
+        style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>{'Land Details'}</CommonText>
         </View>
       </GradientBackground>

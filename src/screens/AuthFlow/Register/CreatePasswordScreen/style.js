@@ -9,9 +9,6 @@ import { colors } from '../../../../themes/colors';
 import { fonts } from '../../../../themes/fonts';
 
 export const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
@@ -26,9 +23,6 @@ export const styles = StyleSheet.create({
   },
   resetPassword: {
     marginTop: verticalScale(24),
-  },
-  backIcon: {
-    marginBottom: verticalScale(20),
   },
   backButtonComponentStyle: { resizeMode: 'contain' },
   logoContainer: {

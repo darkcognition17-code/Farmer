@@ -3,16 +3,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   TouchableOpacityProps,
+  TextStyle,
 } from 'react-native';
 import { moderateScale } from '../utils/responsive';
 import { fonts } from '../themes/fonts';
 import { colors } from '../themes/colors';
 import CommonText from './CommonText'; // Import CommonText
-import { TextProps } from 'react-native-svg';
 
 interface CommonButtonProps extends TouchableOpacityProps {
   title: string;
-  textStyle?: TextProps;
+  textStyle?: TextStyle;
 }
 
 const CommonButton: React.FC<CommonButtonProps> = ({

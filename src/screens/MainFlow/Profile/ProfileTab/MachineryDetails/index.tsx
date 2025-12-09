@@ -91,7 +91,8 @@ const MachineryDetails = () => {
     navigation.navigate(screenNames.AddMachineryScreen);
   };
 
-  const handleDeleteMachinery = async (item: any) => { // Modified to accept item
+  const handleDeleteMachinery = async (item: any) => {
+    // Modified to accept item
     setEditModal(false);
     try {
       if (item && item.id) {
@@ -123,7 +124,7 @@ const MachineryDetails = () => {
     switch (type) {
       case 'tractor':
         return (
-          <>
+          <View style={styles.flexWrap}>
             <View style={styles.detailItem}>
               <DetailRow
                 label={t('machineryDetails.driverTypeLabel')}
@@ -131,6 +132,7 @@ const MachineryDetails = () => {
                 itemName={item.name}
               />
             </View>
+
             <View style={styles.detailItem}>
               <DetailRow
                 label={t('machineryDetails.hpLabel')}
@@ -160,7 +162,7 @@ const MachineryDetails = () => {
                 itemName={item.name}
               />
             </View>
-          </>
+          </View>
         );
       case 'balers':
         return (
@@ -174,7 +176,7 @@ const MachineryDetails = () => {
         );
       case 'trolleys':
         return (
-          <>
+          <View style={[styles.flexWrap, styles.trolleyStyling]}>
             <View style={styles.detailItem}>
               <DetailRow
                 label={t('machineryDetails.trolleyTypeLabel')}
@@ -193,7 +195,7 @@ const MachineryDetails = () => {
                 itemName={item.name}
               />
             </View>
-          </>
+          </View>
         );
       case 'tube well pumps':
         return (
@@ -251,7 +253,8 @@ const MachineryDetails = () => {
     );
   };
 
-  const handleEdit = (item: any) => { // Modified to accept item
+  const handleEdit = (item: any) => {
+    // Modified to accept item
     navigation.navigate(screenNames.EditMachinery, {
       item: item,
     });
@@ -274,7 +277,7 @@ const MachineryDetails = () => {
     return (
       <CommonDetailsCard
         item={item}
-        onEditPress={handleEdit}
+        onEditPress={() => handleEdit(sentItem)}
         onDeletePress={handleDeleteMachinery}
         imageUrl={item?.imageUrl}
         itemName={machineryNameDisplay}
@@ -289,12 +292,13 @@ const MachineryDetails = () => {
 
   return (
     <View style={styles.main}>
-      <GradientBackground style={styles.progressHeader}>
+      <GradientBackground
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        style={styles.progressHeader}
+      >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
+          {/* <CommonBackButton style={styles.bell} /> */}
           <CommonText style={styles.headerTitle}>
             {t('profileScreen.machineryDetails')}
           </CommonText>

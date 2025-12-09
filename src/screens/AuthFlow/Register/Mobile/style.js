@@ -48,20 +48,13 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  inputLabel: {
-    marginTop: verticalScale(20),
-  },
-
   inputContainer: {
     paddingLeft: scale(53),
     paddingVertical: verticalScale(16),
     fontSize: scaledFontSize(16),
     marginBottom: verticalScale(3),
   },
-  passwordInputContainer: {
-    paddingVertical: verticalScale(16),
-    fontSize: scaledFontSize(16),
-  },
+
   flagAndCode: {
     // gap: moderateScale(8),
     flexDirection: 'row',
@@ -69,12 +62,7 @@ export const styles = StyleSheet.create({
     borderRightWidth: 1,
     paddingRight: scale(3),
   },
-  flagIcon: {
-    height: verticalScale(17),
-    width: scale(24),
-    resizeMode: 'contain',
-    alignSelf: 'center',
-  },
+
   countryCode: {
     fontSize: scaledFontSize(16),
     fontWeight: '400',
@@ -97,16 +85,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  signUpText: {
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals500,
-  },
-  signUpLink: {
-    fontSize: scaledFontSize(14),
-    color: colors.ButtonColor,
-    fontWeight: '600',
-    marginLeft: scale(4),
-  },
+
   logoContainer: {
     alignItems: 'center',
     marginBottom: verticalScale(20),

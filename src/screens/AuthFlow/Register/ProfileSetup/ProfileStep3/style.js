@@ -135,10 +135,6 @@ export const styles = StyleSheet.create({
     marginLeft: moderateScale(14),
   },
 
-  radioSelected: {
-    backgroundColor: colors.ButtonColor,
-    borderColor: colors.ButtonColor,
-  },
   radioLabel: {
     fontSize: moderateScale(12),
     marginLeft: moderateScale(5),
@@ -175,14 +171,6 @@ export const styles = StyleSheet.create({
   educationContainer: { paddingBottom: moderateScale(20) },
   screenWrapper: {
     flex: 1,
-  },
-  imageBackground: {
-    resizeMode: 'cover',
-    height: moderateScale(220),
-  },
-  keyboardAvoidingView: {
-    flex: 1,
-    width: '100%',
   },
   tooltipContent: {
     color: colors.white,

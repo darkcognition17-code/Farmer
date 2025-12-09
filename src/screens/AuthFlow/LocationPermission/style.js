@@ -9,13 +9,6 @@ import { fonts } from '../../../themes/fonts';
 import { colors } from '../../../themes/colors';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.Primary950,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: moderateScale(16),
-  },
   logo: {
     width: scale(180),
     height: verticalScale(100),

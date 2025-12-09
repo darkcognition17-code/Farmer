@@ -17,7 +17,7 @@ import {
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
 import CommonButton from '../../../../../components/CommonButton';
 import { screenNames } from '../../../../../navigation/screenNames';
-import { CommonBackButton, GradientBackground } from '../../../../../components';
+import { GradientBackground } from '../../../../../components';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -33,12 +33,13 @@ const DeletAccount = () => {
       bgColor={colors.transparent}
       style={styles.screenWrapperContainer}
     >
-      <GradientBackground imageStyle={styles.imageBackgroundStyle}>
+      <GradientBackground
+        imageStyle={styles.imageBackgroundStyle}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>Delete Account</CommonText>
         </View>
       </GradientBackground>

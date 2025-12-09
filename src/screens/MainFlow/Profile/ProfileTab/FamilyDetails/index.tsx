@@ -14,7 +14,6 @@ import {
   ScreenWrapper,
   CommonLoader,
   GradientBackground,
-  CommonBackButton,
 } from '../../../../../components';
 import { moderateScale } from '../../../../../utils/responsive';
 import { UserUnfilledGray } from '../../../../../assets/icons';
@@ -87,11 +86,11 @@ const FamilyDetails = () => {
     )
       .unwrap()
       .then(res => {
-        showToastable({ message: res?.message, status: 'success' });
+        showToastable({ message: res?.message, status: 'success', status: 'success' });
         navigation.goBack();
       })
       .catch(error => {
-        showToastable({ message: error?.message, status: 'success' });
+        showToastable({ message: error?.message, status: 'success', status: 'success' });
 
         // Alert.alert(t('familyMemberDetails.saveError'), error);
       });
@@ -107,12 +106,13 @@ const FamilyDetails = () => {
       showBackButton
       gradientHeader
     >
-      <GradientBackground style={styles.progressHeader}>
+      <GradientBackground
+        style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <View style={styles.headerContainer}>
-          <CommonBackButton
-            onPress={() => navigation.goBack()}
-            style={styles.bell}
-          />
           <CommonText style={styles.headerTitle}>
             {t('familyMemberDetails.headerTitle')}
           </CommonText>

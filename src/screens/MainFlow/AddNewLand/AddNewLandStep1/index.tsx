@@ -24,7 +24,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AppStackParamList } from '../../../../navigation/appNavigator';
 import { useTranslation } from 'react-i18next';
 import {
-  BackButton,
   DownIcon,
   Land,
   TickFilled,
@@ -99,16 +98,14 @@ const AddNewLandStep1 = () => {
 
   return (
     <ScreenWrapper scrollable style={styles.screenWrapper}>
-      <GradientBackground style={styles.progressHeader}>
+      <GradientBackground
+        style={styles.progressHeader}
+        showBackButton={true}
+        onBackPress={() => navigation.goBack()}
+        backButtonStyles={styles.bell}
+      >
         <CommonLoader visible={loading} />
         <View style={styles.headerContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            activeOpacity={0.8}
-            style={styles.bell}
-          >
-            <BackButton width={moderateScale(10)} height={moderateScale(15)} />
-          </TouchableOpacity>
           <CommonText style={styles.headerTitle}>
             {t('addNewLand.title')}
           </CommonText>

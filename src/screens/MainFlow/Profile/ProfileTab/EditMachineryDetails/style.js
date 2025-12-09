@@ -8,6 +8,7 @@ import {
 } from '../../../../../utils/responsive';
 
 export const styles = StyleSheet.create({
+  main: { backgroundColor: colors.transparent, flex: 1 },
   progressHeader: {
     paddingBottom: moderateScale(20),
     justifyContent: 'center',
@@ -19,7 +20,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '92%',
+    // width: '92%',
     marginTop: verticalScale(62),
     marginBottom: verticalScale(20),
   },
@@ -39,108 +40,7 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: fonts.semiBold,
   },
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    padding: moderateScale(16),
-  },
-  header: {
-    fontSize: moderateScale(18),
-    fontWeight: '600',
-    marginBottom: verticalScale(10),
-  },
-  sectionCard: {
-    backgroundColor: colors.white,
-    borderRadius: moderateScale(20),
-    paddingHorizontal: moderateScale(20),
-    paddingVertical: verticalScale(24),
-    marginHorizontal: verticalScale(16),
-  },
   listContainer: { gap: 16, marginTop: 18, flex: 1 },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: verticalScale(16),
-  },
-  sectionTitle: {
-    fontWeight: '600',
-    fontFamily: fonts.semiBold,
-    fontSize: scaledFontSize(18),
-    color: colors.Neutrals010,
-  },
-  fieldRow: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    rowGap: moderateScale(16),
-  },
-  fieldCol: {
-    width: '48%',
-  },
-  inputContainer: {
-    marginBottom: 0,
-  },
-  input: {
-    paddingVertical: verticalScale(18),
-    paddingHorizontal: moderateScale(14),
-  },
-  repreatableInput: {
-    paddingVertical: verticalScale(15),
-    paddingHorizontal: moderateScale(14),
-  },
-  repeatableContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  nonRepeatableContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  label: {
-    fontWeight: '500',
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals100,
-    marginBottom: 4,
-  },
-  dateFieldContainer: { flex: 1 },
-  toggleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: verticalScale(16),
-    marginTop: verticalScale(4),
-  },
-  toggleButton: {
-    borderWidth: 1,
-    borderColor: colors.Neutrals700,
-    borderRadius: moderateScale(12),
-    paddingVertical: verticalScale(13),
-    paddingHorizontal: verticalScale(16),
-    width: '48%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  otherInput: { height: verticalScale(80) },
-  selectedToggle: {
-    borderColor: colors.ButtonColor,
-    color: colors.ButtonColor,
-  },
-  toggleText: {
-    color: colors.Neutrals010,
-    fontWeight: '500',
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(14),
-  },
-  quantityText: {
-    // marginTop: verticalScale(6),
-    fontWeight: '500',
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals300,
-  },
   buttonsContainer: {
     backgroundColor: colors.white,
     paddingVertical: moderateScale(24),
@@ -151,7 +51,6 @@ export const styles = StyleSheet.create({
   },
 
   saveButtonContainer: {
-    flex: 1,
     width: '92%',
     alignSelf: 'center',
     justifyContent: 'flex-end',
@@ -159,14 +58,5 @@ export const styles = StyleSheet.create({
   saveButton: {
     paddingVertical: moderateScale(17),
     marginBottom: 0,
-  },
-  itemRightContainer: {
-    // New style for quantity buttons
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  quantityButton: {
-    // New style for quantity buttons
-    paddingHorizontal: moderateScale(8),
   },
 });

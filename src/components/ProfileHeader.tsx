@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import { CommonBackButton, GradientBackground } from '.';
+import { GradientBackground } from '.';
 import { colors } from '../themes/colors';
 import {
   moderateScale,
@@ -40,13 +40,10 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     <GradientBackground
       imageStyle={styles.imageBackground}
       style={styles.progressHeader}
+      showBackButton={isShowBackButton}
+      onBackPress={() => navigation.goBack()}
+      backButtonStyles={styles.bell}
     >
-      {isShowBackButton && (
-        <CommonBackButton
-          onPress={() => navigation.goBack()}
-          style={styles.bell}
-        />
-      )}
       <CommonText style={styles.title}>{mainTitle ?? ''}</CommonText>
 
       <View style={styles.profileCard}>
