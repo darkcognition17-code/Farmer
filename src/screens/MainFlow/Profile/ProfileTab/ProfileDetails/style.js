@@ -13,40 +13,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     // padding: moderateScale(16),
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: verticalScale(10),
-  },
-
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontFamily: fonts.bold,
-    fontSize: moderateScale(18),
-    color: colors.black,
-  },
-  iconOffset: {
-    top: moderateScale(-2),
-  },
-  profileBox: {
-    alignItems: 'center',
-    // backgroundColor: colors.lightGreen,
-    borderRadius: moderateScale(16),
-    paddingVertical: verticalScale(20),
-    marginBottom: verticalScale(16),
-  },
-  profileImage: {
-    width: moderateScale(80),
-    height: moderateScale(80),
-    borderRadius: moderateScale(40),
-  },
-  name: {
-    marginTop: verticalScale(8),
-    fontFamily: fonts.semiBold,
-    fontSize: moderateScale(16),
-    // color: colors.n010,
-  },
   titleText: {
     fontFamily: fonts.medium,
     fontWeight: '500',

@@ -40,14 +40,6 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: fonts.semiBold,
   },
-  keyboardAvoidingView: {},
-  // FAQ styles
-  container: {},
-  title: {
-    fontSize: scaledFontSize(20),
-    fontWeight: '700',
-    color: colors.DarkGray2,
-  },
   questionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

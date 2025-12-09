@@ -25,8 +25,9 @@ export const styles = StyleSheet.create({
     marginBottom: verticalScale(20),
   },
   errorText: {
-    flex: 1, textAlign: 'center', marginTop: 50 
-    
+    flex: 1,
+    textAlign: 'center',
+    marginTop: 50,
   },
   bell: {
     borderRadius: moderateScale(9),
@@ -97,8 +98,8 @@ export const styles = StyleSheet.create({
     fontSize: scaledFontSize(16),
     fontWeight: '500',
   },
-  otherInput:{width: moderateScale(250)},
-  loader:{ flex: 1, justifyContent: 'center', alignItems: 'center' },
+  otherInput: { width: moderateScale(250) },
+  loader: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   otherLabel: {
     marginTop: verticalScale(24),
     color: colors.Neutrals300,
@@ -173,16 +174,7 @@ export const styles = StyleSheet.create({
   otherButtonText: {
     color: colors.ButtonColor,
   },
-  deleteButton: {
-    backgroundColor: colors.white,
-    borderColor: colors.error,
-    borderWidth: 1,
-    paddingHorizontal: moderateScale(40),
-    paddingVertical: moderateScale(17),
-  },
-  deleteButtonText: {
-    color: colors.error,
-  },
+
   saveButtonContainer: {
     flex: 0,
   },

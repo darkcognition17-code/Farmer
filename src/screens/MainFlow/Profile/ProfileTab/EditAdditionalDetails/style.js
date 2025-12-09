@@ -11,12 +11,7 @@ export const styles = StyleSheet.create({
   screenWrapperContainer: {
     flex: 1,
   },
-  progressHeader: {
-    paddingBottom: moderateScale(5),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: moderateScale(24),
-  },
+
   imageBackgroundStyle: {
     width: '100%',
     height: verticalScale(200),
@@ -30,6 +25,12 @@ export const styles = StyleSheet.create({
     width: '92%',
     marginTop: verticalScale(60),
   },
+  headerTitle: {
+    fontSize: scaledFontSize(18),
+    color: colors.Neutrals010,
+    fontWeight: '700',
+    fontFamily: fonts.bold,
+  },
   bell: {
     borderRadius: moderateScale(9),
     backgroundColor: colors.white,
@@ -40,11 +41,14 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  headerTitle: {
-    fontSize: scaledFontSize(18),
-    color: colors.Neutrals010,
-    fontWeight: '700',
-    fontFamily: fonts.bold,
+  userOrangeIcon: {
+    marginLeft: moderateScale(4),
+  },
+  progressHeader: {
+    paddingBottom: moderateScale(5),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: moderateScale(24),
   },
   subHeaderTitle: {
     fontSize: scaledFontSize(18),
@@ -53,7 +57,7 @@ export const styles = StyleSheet.create({
     marginBottom: verticalScale(18),
     fontFamily: fonts.semiBold,
   },
-  inputContainer:{ marginBottom: verticalScale(16) },
+  inputContainer: { marginBottom: verticalScale(16) },
   contentContainer: {
     backgroundColor: colors.white,
     marginHorizontal: moderateScale(16),
@@ -65,44 +69,16 @@ export const styles = StyleSheet.create({
   },
 
   genderLabel: {
-
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: moderateScale(6),
-      width: '50%',
-
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: moderateScale(6),
+    width: '50%',
   },
   genderContainer: {
-     flexDirection: 'row', marginVertical: 10 
+    flexDirection: 'row',
+    marginVertical: 10,
   },
 
-  profileSection: {
-    alignItems: 'center',
-    marginBottom: moderateScale(25),
-  },
-  profileImage: {
-    width: moderateScale(96),
-    height: moderateScale(96),
-    borderRadius: moderateScale(12),
-  },
-  cameraIcon: {
-    position: 'absolute',
-    bottom: moderateScale(-10),
-    right: moderateScale(100),
-    backgroundColor: colors.Secondary,
-    borderColor: colors.white,
-    borderWidth: moderateScale(1),
-    borderRadius: moderateScale(20),
-    padding: moderateScale(6),
-  },
-  userOrangeIcon: {
-    marginLeft: moderateScale(4),
-  },
-  label: {
-    marginBottom: moderateScale(8),
-    fontSize: scaledFontSize(14),
-    color: colors.Neutrals100,
-  },
   inputField: {
     paddingVertical: moderateScale(17),
     fontFamily: fonts.medium,
@@ -110,15 +86,11 @@ export const styles = StyleSheet.create({
     color: colors.Neutrals010,
     borderRadius: moderateScale(12),
   },
-  mobileInputField: {
-    paddingVertical: moderateScale(17),
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(16),
-    color: colors.Neutrals010,
-    paddingLeft: moderateScale(94),
-  },
-  indianFlagIcon: {
-    marginLeft: moderateScale(5),
+
+  label: {
+    marginBottom: moderateScale(8),
+    fontSize: scaledFontSize(14),
+    color: colors.Neutrals100,
   },
   buttonWrapper: {
     // marginTop: moderateScale(24),

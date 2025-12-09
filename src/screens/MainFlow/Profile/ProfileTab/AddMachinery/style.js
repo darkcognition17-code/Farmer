@@ -10,7 +10,6 @@ import {
 export const styles = StyleSheet.create({
   loader: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   errorText: { flex: 1, textAlign: 'center', marginTop: 50 },
-  mainContainer: { backgroundColor: colors.transparent, flex: 1 },
   progressHeader: {
     paddingBottom: moderateScale(20),
     justifyContent: 'center',
@@ -50,25 +49,7 @@ export const styles = StyleSheet.create({
     gap: moderateScale(6),
     marginTop: moderateScale(16),
   },
-  itemContainer: {
-    backgroundColor: colors.white,
-    borderRadius: moderateScale(12),
-    justifyContent: 'space-between',
-    paddingVertical: moderateScale(12),
-    paddingHorizontal: moderateScale(16),
-    gap: moderateScale(14),
-    flexDirection: 'row',
-  },
-  itemLeftContainer: {
-    flexDirection: 'row',
-    gap: moderateScale(16),
-    alignItems: 'center',
-  },
-  itemIconContainer: {
-    backgroundColor: colors.ButtonColor + '1A',
-    padding: moderateScale(10),
-    borderRadius: moderateScale(60),
-  },
+
   listHeader: {
     fontSize: scaledFontSize(16),
     fontFamily: fonts.semiBold,
@@ -76,83 +57,7 @@ export const styles = StyleSheet.create({
     color: colors.Neutrals300,
     marginBottom: 8,
   },
-  itemName: {
-    color: colors.Neutrals100,
-    fontFamily: fonts.bold,
-    fontSize: scaledFontSize(14),
-    fontWeight: '700',
-  },
-  itemRightContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: moderateScale(15),
-    alignItems: 'center',
-  },
-  quantityButton: {
-    backgroundColor: colors.QuantityButtonBackgroundColor,
-    borderRadius: moderateScale(8),
-    height: moderateScale(28),
-    width: moderateScale(28),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  quantityText: {
-    color: colors.Neutrals100,
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(16),
-    fontWeight: '500',
-  },
-  otherLabel: {
-    marginTop: verticalScale(24),
-    color: colors.Neutrals300,
-    fontFamily: fonts.semiBold,
-    fontSize: scaledFontSize(16),
-    fontWeight: '600',
-  },
-  otherDetailsContainer: {
-    backgroundColor: colors.white,
-    paddingVertical: verticalScale(24),
-    paddingHorizontal: moderateScale(20),
-    borderRadius: moderateScale(20),
-    marginTop: verticalScale(12),
-  },
-  inputLabel: {
-    marginTop: verticalScale(24),
-    color: colors.Neutrals300,
-    fontFamily: fonts.semiBold,
-    fontSize: scaledFontSize(16),
-    fontWeight: '600',
-  },
-  ownershipContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: verticalScale(12),
-    gap: moderateScale(16),
-  },
-  genderOption: {
-    width: '48%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 13,
-    paddingHorizontal: 16,
-    borderWidth: 1.5,
-    borderColor: colors.ButtonDisableColor,
-    borderRadius: 12,
-    backgroundColor: colors.white,
-  },
-  genderOptionSelected: {
-    borderColor: colors.ButtonColor,
-  },
-  genderText: {
-    color: colors.black,
-    fontFamily: fonts.medium,
-    fontSize: scaledFontSize(14),
-    fontWeight: '500',
-  },
-  ownershipTextSelected: {
-    color: colors.ButtonColor,
-  },
+
   buttonsContainer: {
     paddingVertical: moderateScale(24),
 
@@ -171,18 +76,6 @@ export const styles = StyleSheet.create({
     paddingVertical: moderateScale(17),
     marginBottom: 0,
   },
-  otherButtonContainer: {
-    flex: 0,
-  },
-  otherButton: {
-    backgroundColor: colors.white,
-    borderColor: colors.ButtonColor,
-    borderWidth: 1,
-    paddingHorizontal: moderateScale(40),
-    paddingVertical: moderateScale(17),
-  },
-  otherButtonText: {
-    color: colors.ButtonColor,
-  },
+
   footerStyle: { marginBottom: verticalScale(41) },
 });

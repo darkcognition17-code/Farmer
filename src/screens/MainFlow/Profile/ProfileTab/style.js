@@ -17,11 +17,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(16),
     gap: moderateScale(8),
   },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: moderateScale(10),
-  },
   additionalSection: {
     backgroundColor: colors.white,
     padding: moderateScale(16),

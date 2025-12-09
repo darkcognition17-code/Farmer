@@ -15,7 +15,6 @@ import * as RNLocalize from 'react-native-localize';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigation';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from './style';
 import { Images } from '../../assets/images';
 import { ToggleOn, ToggleOff } from '../../assets/icons';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';

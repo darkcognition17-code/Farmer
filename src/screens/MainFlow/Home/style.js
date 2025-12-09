@@ -13,21 +13,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: moderateScale(16),
   },
-  editButton: {
-    backgroundColor: colors.ButtonColor,
-    borderRadius: moderateScale(28),
-    padding: moderateScale(6),
-    position: 'absolute',
-    top: moderateScale(6),
-    right: moderateScale(6),
-    shadowColor: colors.black + '0D',
-    shadowOpacity: 1,
-    shadowRadius: 14,
-    shadowOffset: {
-      height: 4,
-      width: 0,
-    },
-  },
   dateText: {
     marginTop: verticalScale(6),
     color: colors.Neutrals300,
@@ -92,53 +77,7 @@ export const styles = StyleSheet.create({
   loader: {
     paddingVertical: moderateScale(50),
   },
-  location: {
-    flexDirection: 'row',
-    gap: moderateScale(8),
-    alignItems: 'center',
-    marginLeft: moderateScale(5),
-    marginBottom: verticalScale(10),
-  },
-  locationText: {
-    fontSize: moderateScale(13),
-    fontFamily: fonts.semiBold,
-    lineHeight: verticalScale(20),
-    color: colors.black,
-  },
-  weather: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  tempText: {
-    fontSize: scaledFontSize(48),
-    fontWeight: '700',
-    fontFamily: fonts.bold,
-  },
-  conditionText: {
-    fontSize: scaledFontSize(14),
-    fontWeight: '500',
-    fontFamily: fonts.medium,
-    color: colors.Neutrals100,
-  },
-  weatherImage: {
-    width: moderateScale(80),
-    height: moderateScale(80),
-    resizeMode: 'contain',
-  },
-  weatherTipContainer: {
-    borderTopWidth: 1,
-    borderTopColor: colors.LightBorder,
-    paddingTop: verticalScale(12),
-    marginTop: verticalScale(14),
-    marginBottom: verticalScale(20),
-  },
-  weatherTip: {
-    color: colors.Neutrals500,
-    fontSize: moderateScale(14),
-    lineHeight: verticalScale(20),
-    fontFamily: fonts.medium,
-  },
+
   kisaniCard: {
     backgroundColor: colors.KisaniCardBg,
     borderRadius: moderateScale(20),
@@ -217,81 +156,7 @@ export const styles = StyleSheet.create({
     lineHeight: verticalScale(20),
     fontWeight: '500',
   },
-  landCard: {
-    backgroundColor: colors.white,
-    borderRadius: moderateScale(14),
-    padding: moderateScale(16),
-    marginBottom: verticalScale(30),
-    marginLeft: moderateScale(16),
-  },
-  landThumb: {
-    width: moderateScale(98),
-    height: moderateScale(98),
-    resizeMode: 'cover',
-    borderRadius: moderateScale(16),
-    position: 'absolute',
-    zIndex: 1,
-    top: moderateScale(-15),
-    left: moderateScale(-15),
-  },
-  geoTag: {
-    width: moderateScale(82),
-    height: moderateScale(30),
-    resizeMode: 'cover',
-    borderRadius: moderateScale(16),
-    position: 'absolute',
-    top: moderateScale(-3),
-    right: moderateScale(-3),
-  },
-  landContent: {
-    flex: 1,
-    marginLeft: moderateScale(90),
-  },
-  landTitle: {
-    fontSize: scaledFontSize(18),
-    fontWeight: '700',
-    fontFamily: fonts.bold,
-    lineHeight: verticalScale(24),
-  },
-  cropRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: moderateScale(8),
-    gap: moderateScale(8),
-  },
-  leaf: {
-    padding: moderateScale(8),
-    borderRadius: moderateScale(14),
-    backgroundColor: colors.LeafBg,
-  },
-  cropCount: {
-    color: colors.CropCountGreen,
-    fontWeight: '700',
-  },
-  noCount: { color: colors.Secondary },
-  landFooter: {
-    marginTop: moderateScale(25),
-    marginBottom: moderateScale(5),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: moderateScale(8),
-    backgroundColor: colors.LandFooterBg,
-    paddingHorizontal: moderateScale(16),
-    paddingVertical: verticalScale(11),
-  },
-  ownedLabel: {
-    color: colors.OwnedLabelText + 'E5',
-    fontWeight: '400',
-    fontFamily: fonts.regular,
-    lineHeight: verticalScale(18),
-    fontSize: scaledFontSize(12),
-  },
-  acres: {
-    fontWeight: '700',
-    fontFamily: fonts.bold,
-    fontSize: scaledFontSize(15),
-  },
+
   accuweather: {
     height: moderateScale(9),
     width: moderateScale(63),
@@ -316,11 +181,7 @@ export const styles = StyleSheet.create({
   landListStyle: {
     paddingTop: verticalScale(18),
   },
-  cropCountContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   emptyListContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -342,13 +203,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.medium,
     // marginBottom: moderateScale(10),
   },
-  addLandButton: {
-    width: moderateScale(150),
-    height: moderateScale(40),
-    borderRadius: moderateScale(8),
-    backgroundColor: colors.ButtonColor,
-    marginTop: moderateScale(10),
-  },
+
   bottomGap: {
     marginTop: verticalScale(100),
   },
