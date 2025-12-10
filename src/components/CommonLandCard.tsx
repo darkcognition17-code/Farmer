@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import CommonText from './CommonText';
-import { CropLeaf, NoCropLeaf } from '../assets/icons';
+import { CropLeaf, NoCropLeaf, EditPencilIcon } from '../assets/icons';
 import { Images } from '../assets/images';
 import { colors } from '../themes/colors';
 import { fonts } from '../themes/fonts';
@@ -26,7 +26,9 @@ interface LandCardProps {
   ownedType: string;
   imageSource: ImageSourcePropType;
   isGeoTagged?: boolean;
-  onPress: () => void;
+  onPress?: () => void; // Made optional as it might not be needed when onEdit is present
+  onEdit?: () => void; // New optional prop for edit functionality
+  isDetailScreen?: Boolean;
 }
 
 const CommonLandCard: React.FC<LandCardProps> = ({
@@ -38,20 +40,38 @@ const CommonLandCard: React.FC<LandCardProps> = ({
   imageSource,
   isGeoTagged,
   onPress,
+  onEdit, // Destructure new prop
+  isDetailScreen = false,
 }) => {
   const { t } = useTranslation();
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-      <View style={styles.landCard}>
+    <TouchableOpacity onPress={onPress} activeOpacity={onPress ? 0.8 : 1}>
+      <View style={isDetailScreen ? styles.landCardDetails : styles.landCard}>
         {/* Land Image */}
-        <Image source={imageSource} style={styles.landThumb} />
+        <Image
+          source={imageSource}
+          style={isDetailScreen ? styles.landThumb : styles.landThumbDetails}
+        />
 
         {/* GeoTag Badge (Specific to Home Screen logic) */}
         {isGeoTagged && <Image source={Images.geoTag} style={styles.geoTag} />}
 
         <View style={styles.landContent}>
           <CommonText style={styles.landTitle}>{title}</CommonText>
+
+          {onEdit && ( // Conditionally render edit button
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.editButton}
+              onPress={onEdit}
+            >
+              <EditPencilIcon
+                width={moderateScale(14)}
+                height={moderateScale(14)}
+              />
+            </TouchableOpacity>
+          )}
 
           {/* Crop Count Logic */}
           <View style={styles.cropRow}>
@@ -80,7 +100,7 @@ const CommonLandCard: React.FC<LandCardProps> = ({
         {/* Footer: Ownership & Area */}
         <View style={styles.landFooter}>
           <CommonText style={styles.ownedLabel}>
-            {t(`home.${ownedType.toLowerCase()}`)}
+            {t(`home.${ownedType?.toLowerCase()}`)}
           </CommonText>
           <CommonText style={styles.acres}>
             {acres} {areaUnit}
@@ -101,7 +121,24 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(30),
     marginLeft: moderateScale(16), // Note: Keep check if margins fit both screens
   },
+  landCardDetails: {
+    backgroundColor: colors.white,
+    borderRadius: moderateScale(14),
+    padding: moderateScale(16),
+    marginBottom: verticalScale(30),
+    marginHorizontal: moderateScale(16),
+  },
   landThumb: {
+    width: moderateScale(64),
+    height: moderateScale(64),
+    resizeMode: 'cover',
+    borderRadius: moderateScale(16),
+    position: 'absolute',
+    zIndex: 1,
+    top: moderateScale(16),
+    left: moderateScale(16),
+  },
+  landThumbDetails: {
     width: moderateScale(98),
     height: moderateScale(98),
     resizeMode: 'cover',
@@ -168,5 +205,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: fonts.bold,
     fontSize: scaledFontSize(15),
+  },
+  editButton: {
+    // New style for the edit button
+    backgroundColor: colors.Orange,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(4),
+    position: 'absolute',
+    right: moderateScale(-8),
+    top: moderateScale(-8),
   },
 });

@@ -1,5 +1,5 @@
-import { addmachinaryDetails } from '../redux/slices/authSlice';
-import { store } from '../redux/store';
+import { addmachinaryDetails } from './../redux/slices/authSlice';
+import { store } from './../redux/store';
 import { Double } from 'react-native/Libraries/Types/CodegenTypes';
 import apiClient from './apiClient';
 import { endpoints } from '../utils/endpoints';

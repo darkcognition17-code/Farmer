@@ -64,17 +64,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: moderateScale(25),
   },
-  bell: {
-    borderRadius: moderateScale(9),
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    paddingVertical: moderateScale(10),
-    paddingLeft: moderateScale(12),
-    paddingRight: moderateScale(14),
-    position: 'absolute',
-    left: 0,
-  },
-
   profileImage: {
     width: moderateScale(96),
     height: moderateScale(96),

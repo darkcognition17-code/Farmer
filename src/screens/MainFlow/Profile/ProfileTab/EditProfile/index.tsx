@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
+import { View, Image, TouchableOpacity, Platform } from 'react-native';
 import {
   CommonInput,
   CommonButton,
   CommonText,
   ScreenWrapper,
   CommonLoader, // Import CommonLoader
-  GradientBackground,
+  GenderSelection,
+  CommonHeader,
 } from '../../../../../components';
 import { colors } from '../../../../../themes/colors';
 import { moderateScale, verticalScale } from '../../../../../utils/responsive';
@@ -21,18 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { showToastable } from 'react-native-toastable';
 import {
   Calender,
-  CalenderBlack,
-  DobGray,
-  DownBlack,
-  Female,
-  FemaleInBlack,
-  IndianFlagWithNumer,
-  Male,
-  MaleInBlack,
   NameGray,
-  UserMyProfile,
-  UserOrange,
-  UserUnfilled,
   UserUnfilledGray,
   WhiteCamera,
 } from '../../../../../assets/icons';
@@ -44,9 +28,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../../redux/store'; // Import AppDispatch
 import { updateFarmerProfile } from '../../../../../redux/slices/authSlice'; // Import updateFarmerProfile
 import { IMAGE_BASE_URL } from '../../../../../utils/helperFunction';
-import GenderButton from '../../../../../components/GenderButton';
 import CommonDropdown from '../../../../../components/CommonDropdown';
 import DatePicker from 'react-native-date-picker';
+import { useEffect, useState } from 'react';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -209,19 +193,14 @@ const EditProfileScreen = () => {
       bgColor={colors.transparent}
       style={styles.screenWrapperContainer}
     >
-      <GradientBackground
-        style={styles.progressHeader}
-        imageStyle={styles.imageBackgroundStyle}
+      <CommonHeader
+        containerStyle={styles.progressHeader}
+        gradientImageStyle={styles.imageBackgroundStyle}
         showBackButton={true}
         onBackPress={() => navigation.goBack()}
-        backButtonStyles={styles.bell}
-      >
-        <View style={styles.headerContainer}>
-          <CommonText style={styles.headerTitle}>
-            {t('editProfile.headerTitle')}
-          </CommonText>
-        </View>
-      </GradientBackground>
+        title={t('editProfile.headerTitle')}
+        titleStyle={styles.headerTitle}
+      />
       <View style={styles.contentContainer}>
         <View style={styles.profileSection}>
           <Image
@@ -261,26 +240,12 @@ const EditProfileScreen = () => {
 
         {/* Email ID */}
         {/* Gender Selector */}
-        <CommonText style={styles.label} variant="body">
-          {t('profileSetup.gender')}
-        </CommonText>
-
-        <View style={styles.genderContainer}>
-          <GenderButton
-            label={t('profileSetup.male')}
-            Icon={MaleInBlack}
-            SelctedIcon={Male}
-            onPress={() => setGender('Male')}
-            isSelected={gender === 'Male'}
-          />
-          <GenderButton
-            label={t('profileSetup.female')}
-            Icon={FemaleInBlack}
-            SelctedIcon={Female}
-            onPress={() => setGender('Female')}
-            isSelected={gender === 'Female'}
-          />
-        </View>
+        <GenderSelection
+          gender={gender}
+          onGenderChange={setGender}
+          labelStyle={styles.label}
+          containerStyle={styles.genderContainer}
+        />
 
         <CommonText style={[styles.label, styles.commonMargin]}>
           {t('profileSetup.dateOfBirth')}

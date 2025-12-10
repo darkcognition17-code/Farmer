@@ -14,8 +14,9 @@ import {
   CommonInput,
   CommonLoader,
   CommonText,
-  GradientBackground,
+  GenderSelection,
   ScreenWrapper,
+  CommonHeader,
 } from '../../../../../components';
 import CommonDropdown from '../../../../../components/CommonDropdown';
 import {
@@ -25,11 +26,6 @@ import {
   FrontSideUpload,
   IDNumber,
   KishaniDidi,
-  Female,
-  FemaleInBlack,
-  Male,
-  MaleInBlack,
-  ProfileSelectTab,
   UserUnfilled,
   Calender,
   CloseButton,
@@ -50,7 +46,6 @@ import { Images } from '../../../../../assets/images';
 import { Text } from 'react-native-gesture-handler';
 import CommonBottomSelectModal from '../../../../../components/CommonBottomSelectModal';
 import { useTranslation } from 'react-i18next';
-import GenderButton from '../../../../../components/GenderButton';
 import DatePicker from 'react-native-date-picker';
 import { fonts } from '../../../../../themes/fonts';
 import EncryptionService, {
@@ -374,13 +369,10 @@ const ProfileSetupStep1 = () => {
       {/* Top Linear Gradient Section (Progress Bar) */}
       {/* Progress Bar and Text */}
       <CommonLoader visible={loading} />
-      <GradientBackground style={styles.progressHeader}>
-        {/* Optional overlay for clarity */}
-        {/* <View style={styles.overlay} /> */}
-        <CommonText style={styles.headerTitle}>
-          {t('contactDetailScreen.header')}
-        </CommonText>
-        {/* Progress Card */}
+      <CommonHeader
+        containerStyle={styles.progressHeader}
+        title={t('contactDetailScreen.header')}
+      >
         <View style={styles.progressContent}>
           <ProfileProgressCard
             progress={calculateProgress()}
@@ -390,7 +382,7 @@ const ProfileSetupStep1 = () => {
             isFrom={t('profileSetup.complete')}
           />
         </View>
-      </GradientBackground>
+      </CommonHeader>
       <View>
         <View style={styles.contentContainer}>
           {/* My Kisani Didi Dropdown */}
@@ -529,29 +521,12 @@ const ProfileSetupStep1 = () => {
           />
 
           {/* Gender Selector */}
-          <CommonText
-            style={[styles.inputLabel, styles.genderLabel]}
-            variant="body"
-          >
-            {t('profileSetup.gender')}
-          </CommonText>
-          {/* <GenderSelector gender={gender} setGender={setGender} /> */}
-          <View style={styles.genderContainer}>
-            <GenderButton
-              label={t('profileSetup.male')}
-              Icon={MaleInBlack}
-              SelctedIcon={Male}
-              onPress={() => setGender('Male')}
-              isSelected={gender === 'Male'}
-            />
-            <GenderButton
-              label={t('profileSetup.female')}
-              Icon={FemaleInBlack}
-              SelctedIcon={Female}
-              onPress={() => setGender('Female')}
-              isSelected={gender === 'Female'}
-            />
-          </View>
+          <GenderSelection
+            gender={gender}
+            onGenderChange={setGender}
+            labelStyle={[styles.inputLabel, styles.genderLabel]}
+            containerStyle={styles.genderContainer}
+          />
           {/* Date of Birth Input */}
           <CommonText style={styles.inputLabel} variant="body">
             {t('profileSetup.dateOfBirth')}

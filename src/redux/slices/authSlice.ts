@@ -8,7 +8,7 @@ import {
   UpdateFamilyMembersPayload,
   userNameExist,
   ViewProfileResponse,
-} from '../../services/authService';
+} from './../../services/authService';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import authService, {
   RegisterUsernamePayload,

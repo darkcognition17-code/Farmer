@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import {
   View,
   ScrollView,
@@ -6,32 +5,11 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import ProfileHeader from '../../../components/ProfileHeader';
-import ProfileMenuItem from '../../../components/ProfileMenuItem';
 import {
-  About,
   AddressGray,
-  ContactUs,
-  DeleteAccount,
   DistrictGray,
-  EditModalPencil,
-  Family,
-  FAQ,
-  Language,
-  Livestock,
-  Location,
-  LogOut,
-  Machinery,
   MandalGray,
-  Pincode,
   PincodeGray,
-  PrivacyPolicy,
-  TermsCondition,
-  User,
-  UserMyProfile,
-  UserOrange,
-  UserUnfilled,
-  UserVerify,
   VillageGray,
 } from '../../../assets/icons';
 import {
@@ -54,16 +32,18 @@ import {
   GradientBackground,
   ProfileInfoCard,
 } from '../../../components';
+
 import { styles } from './style';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '../../../redux/store';
 import { IMAGE_BASE_URL } from '../../../utils/helperFunction';
-import LandCard from '../../../components/LandCard';
 import { moderateScale } from '../../../utils/responsive';
 import { Images } from '../../../assets/images';
 import { fetchMachinery } from '../../../redux/slices/machinarySlice';
 import CropCard, { CropItem } from '../../../components/CropCard';
 import { showToastable } from 'react-native-toastable';
+import { useEffect, useState } from 'react';
+import CommonLandCard from '../../../components/CommonLandCard';
 
 type NavigationProp = NativeStackNavigationProp<
   AppStackParamList,
@@ -157,22 +137,31 @@ const LandDetails = () => {
     <CropCard item={item} index={index} onEdit={handleCropEdit} />
   );
 
+  console.log(landDetails);
+
   return (
     <ScrollView style={styles.container}>
       <GradientBackground
-        style={styles.progressHeader}
+        imageStyle={styles.progressHeader}
+        style={styles.headerContainer}
         showBackButton={true}
         onBackPress={() => navigation.goBack()}
-        backButtonStyles={styles.bell}
+        // backButtonStyles={styles.bell}
       >
-        <View style={styles.headerContainer}>
-          <CommonText style={styles.headerTitle}>{'Land Details'}</CommonText>
-        </View>
+        {/* <View style={styles.headerContainer}> */}
+        <CommonText style={styles.headerTitle}>{'Land Details'}</CommonText>
+        {/* </View> */}
       </GradientBackground>
-      <LandCard
-        item={landDetails}
-        navigation={navigation}
-        landImage={landDetailsItem?.imageLand}
+      <CommonLandCard
+        isDetailScreen={true}
+        title={landDetails?.landName}
+        cropCount={landDetails?.cropsCount}
+        acres={landDetails?.area}
+        areaUnit={t(
+          landDetails?.areaUnit == 'hectare' ? 'home.hectare' : 'home.acres',
+        )}
+        ownedType={landDetails?.landType}
+        imageSource={landDetailsItem?.imageLand}
         onEdit={handleLandEdit}
       />
       <ProfileInfoCard

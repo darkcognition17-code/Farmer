@@ -10,21 +10,21 @@ import { fonts } from '../../../themes/fonts';
 
 export const styles = StyleSheet.create({
   progressHeader: {
-    paddingBottom: moderateScale(20),
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     borderBottomLeftRadius: moderateScale(24),
     borderBottomRightRadius: moderateScale(24),
     height: moderateScale(249),
+    // paddingBottom: moderateScale(20),
   },
   headerContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '92%',
-    marginTop: verticalScale(-35),
-    marginBottom: verticalScale(20),
+    marginBottom: verticalScale(35),
+    paddingTop: verticalScale(55),
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // width: '92%',
   },
   bell: {
     borderRadius: moderateScale(9),
@@ -38,10 +38,12 @@ export const styles = StyleSheet.create({
     left: 0,
   },
   headerTitle: {
+    flex: 1,
     fontSize: scaledFontSize(18),
+    fontFamily: fonts.bold,
     color: colors.Neutrals010,
+    textAlign: 'center',
     fontWeight: '700',
-    fontFamily: fonts.semiBold,
   },
 
   // FAQ styles
@@ -49,14 +51,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     // padding: moderateScale(16),
-  },
-
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontFamily: fonts.bold,
-    fontSize: moderateScale(18),
-    color: colors.black,
   },
 
   titleText: {

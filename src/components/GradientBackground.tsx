@@ -36,7 +36,10 @@ const GradientBackground: React.FC<GradientBackgroundProps> = ({
       resizeMode="cover"
     >
       {showBackButton && onBackPress && (
-        <CommonBackButton onPress={onBackPress} style={backButtonStyles ?? styles.defaultBackButton} />
+        <CommonBackButton
+          onPress={onBackPress}
+          style={backButtonStyles ?? styles.defaultBackButton}
+        />
       )}
       {children}
     </ImageBackground>
